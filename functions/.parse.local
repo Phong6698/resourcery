@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "resourcery"
+    },
+    "resourcery": {
+      "applicationId": "dCaFWKOgFP65lzhK1TqJ3vZOTxHMVYAW57zn91HB"
+    }
+  }
+}
