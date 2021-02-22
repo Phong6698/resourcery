@@ -1,3 +1,25 @@
-<h1>Resourcery</h1>
-<p>{{versions.versionLong}}</p>
-<router-outlet></router-outlet>
+<nb-layout>
+
+  <nb-layout-header>
+    <div class="header-container">
+      <h1>Resourcery</h1>
+      <nb-select placeholder="Theme"
+                 [(selected)]="theme"
+                 (selectedChange)="changeTheme($event)"
+                 size="medium">
+        <nb-option value="default">Default</nb-option>
+        <nb-option value="dark">Dark</nb-option>
+        <nb-option value="cosmic">Cosmic</nb-option>
+      </nb-select>
+    </div>
+  </nb-layout-header>
+
+  <nb-layout-column>
+
+    <router-outlet></router-outlet>
+
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>{{versions.versionLong}}</nb-layout-footer>
+
+</nb-layout>
