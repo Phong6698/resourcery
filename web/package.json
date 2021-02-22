@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build.back4app": "ng build --output-path=../public",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
