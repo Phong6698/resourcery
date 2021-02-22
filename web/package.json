@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "ts-appversion --git ../",
     "build": "ng build",
     "build.back4app": "ng build --output-path=../public",
     "test": "ng test",
