@@ -7,6 +7,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbThemeModule, NbLayoutModule, NbSelectModule} from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {CoreModule} from './core/core.module';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import {CoreModule} from './core/core.module';
     NbThemeModule.forRoot({name: 'dark'}),
     NbLayoutModule,
     NbEvaIconsModule,
-    NbSelectModule
+    NbSelectModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    AkitaNgRouterStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
