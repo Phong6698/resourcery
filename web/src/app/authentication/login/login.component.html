@@ -1,0 +1,35 @@
+<form (ngSubmit)="submit()" [formGroup]="loginForm">
+  <div class="card-container">
+    <nb-card>
+      <nb-card-header><h2>Login</h2></nb-card-header>
+      <nb-card-body>
+        <div class="login-form-container">
+          <div class="input-form">
+            <label for="username" class="label">Username</label>
+            <input id="username"
+                   type="text"
+                   nbInput
+                   placeholder="Username"
+                   [formControl]="username"
+                   fullWidth>
+          </div>
+          <div class="input-form">
+            <label for="password" class="label">Password</label>
+            <input id="password"
+                   type="password"
+                   nbInput
+                   placeholder="Password"
+                   [formControl]="password"
+                   fullWidth>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton type="submit" status="success" fullWidth [disabled]="loginForm.invalid">
+          Login
+        </button>
+        <span>Don't have an account? <a [routerLink]="['../register']">Register</a></span>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</form>

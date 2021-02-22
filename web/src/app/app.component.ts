@@ -9,10 +9,13 @@ import * as Parse from 'parse';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   versions = versions;
   theme = 'dark';
 
-  constructor(private nbThemeService: NbThemeService) {
+  constructor(
+    private nbThemeService: NbThemeService
+  ) {
   }
 
   ngOnInit(): void {

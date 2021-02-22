@@ -1,0 +1,39 @@
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+
+  nb-card {
+    max-width: 35rem;
+    width: 100%;
+
+    .register-form-container {
+      display: grid;
+      row-gap: 1em;
+
+      .input-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+
+        .label {
+          margin-bottom: 0.5em;
+        }
+      }
+    }
+
+    nb-card-footer {
+      display: grid;
+      row-gap: 1em;
+
+      span {
+        justify-self: center;
+      }
+    }
+  }
+
+
+}
+
+
