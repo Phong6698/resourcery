@@ -16,6 +16,5 @@ jobs:
       - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
       - run: sudo apt-get install expect
       - run: sudo apt-get install npm
-      - run: npm install
-      - run: nvm install node
+      - run: sudo npm install
       - run: ./script.exp
