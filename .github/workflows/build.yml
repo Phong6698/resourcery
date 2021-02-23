@@ -28,4 +28,4 @@ jobs:
       #      - run: chmod +x ./.github/scripts/script.exp
       - run: ls
       - name: push to back4app
-        run: script.exp
+        run: expect script.exp
