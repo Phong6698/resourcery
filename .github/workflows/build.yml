@@ -24,8 +24,8 @@ jobs:
       #        run: |
       #          npm run build.back4app --prefix web
 
-      #      - run: chmod +x ./.github/scripts/deploy.sh
-      #      - run: chmod +x ./.github/scripts/script.exp
+      - run: chmod +x ./deploy.sh
+      - run: chmod +x ./script.exp
       - run: ls
       - name: push to back4app
         run: expect script.exp
