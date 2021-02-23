@@ -20,7 +20,15 @@ jobs:
       - run: ls -all $PWD
       - name: test expect script
         run: |
-          echo show directory:
-          ls -a
+          echo show directory 1:
+          ls -a ./
+          echo show directory 2:
+          ls -a ../
+          echo show directory 3:
+          ls -a ./scripts
+          echo show directory 4:
+          ls -a ../../
+          echo show directory 5:
+          ls -a ../../../
           echo run script:
-          expect ../scripts/script.exp
+          expect ./scripts/script.exp
