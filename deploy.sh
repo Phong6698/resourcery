@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd cloud_code
+cd cloud
 b4a configure accountkey
 b4a deploy
 cd ..
