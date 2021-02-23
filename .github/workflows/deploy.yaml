@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
-      - run: apt-get update
-      - run: apt-get install build-essential checkinstall libssl-dev
+      - run: sudo apt-get update
+      - run: sudo apt-get install build-essential checkinstall libssl-dev
       - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-      - run: apt-get install expect
-      - run: apt-get install nodejs-legacy
-      - run: apt-get install npm
+      - run: sudo apt-get install expect
+      - run: sudo apt-get install nodejs-legacy
+      - run: sudo apt-get install npm
       - run: npm install
       - run: nvm install node
       - run: ./script.exp
