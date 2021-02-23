@@ -23,7 +23,7 @@ jobs:
           echo show directory 1:
           ls -a ./
           echo show directory 2:
-          ls -a $GITHUB_WORKSPACE
+          ls -a $HOME
           echo show directory 2:
           ls -a ../resourcery/
           echo run script:
