@@ -15,5 +15,5 @@ jobs:
       - run: sudo apt-get install expect
       - run: sudo apt-get install npm
       - run: sudo npm install
-      - run: expect script.exp
+      - run: autoexpect script.exp
 
