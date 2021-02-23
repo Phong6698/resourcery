@@ -48,7 +48,7 @@ match_max 100000
 expect -exact "\r
 Input your account key or press ENTER to generate a new one.\r
 NOTE: on pressing ENTER we'll try to open the url:\r
-   \"http://dashboard.back4app.com/classic#/wizard/account-key"\r
+   \"http://dashboard.back4app.com/classic#/wizard/account-key\"\r
 in default browser.\r
 Account Key: "
 send -- "uqsxZBiWbGfr6X8NBCGU8qMgyB7Z5cmgZM3KDk7P"
