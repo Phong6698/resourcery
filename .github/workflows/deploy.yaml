@@ -17,4 +17,4 @@ jobs:
       - run: sudo npm install
       - run: |
         chmod +x "${GITHUB_WORKSPACE}/script.exp"
-        "${GITHUB_WORKSPACE}/script.exp"
+        ${GITHUB_WORKSPACE}/script.exp
