@@ -1,0 +1,34 @@
+<div class="container">
+
+  <div class="sidenav">
+    <div class="filter">filter</div>
+    <div class="resource" *ngFor="let resource of resources">{{resource}}</div>
+  </div>
+
+  <div class="scheduler">
+    <div class="schedule-row">
+      <div class="months" *ngFor="let month of months, let i = index">
+        <div class="month">{{month.name}}</div>
+        <div class="days">
+          <div class="day" *ngFor="let day of month.days, let y = index">
+            {{ y + 1}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-row" *ngFor="let resource of resources">
+    <div class="month-slot" *ngFor="let month of months, let i = index">
+      <div class="day-slot"
+           [attr.data-day]="y + 1"
+           [attr.data-month]="month.ident"
+           *ngFor="let day of month.days, let y = index">
+        {{ y + 1}}
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+</div>
