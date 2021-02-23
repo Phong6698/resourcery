@@ -11,11 +11,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-#      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
-#      - run: sudo apt-get update
-#      - run: sudo apt-get install -y build-essential checkinstall libssl-dev
+      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y build-essential checkinstall libssl-dev
       - run: sudo apt-get install -y expect
-#      - run: sudo apt-get install npm
-#      - run: sudo npm install
+      - run: sudo apt-get install npm
+      - run: sudo npm install
       - run: chmod +x ./.github/scripts/deploy.sh
       - run: expect ./.github/scripts/script.exp
