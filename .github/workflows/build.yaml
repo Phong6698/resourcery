@@ -21,4 +21,5 @@ jobs:
       - name: test expect script
         working-directory: scripts
         run: |
+          ls -a
           expect scripts/script.exp
