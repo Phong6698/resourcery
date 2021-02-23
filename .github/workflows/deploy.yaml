@@ -8,7 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-
     steps:
       - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
       - run: sudo apt-get update
@@ -16,6 +15,6 @@ jobs:
       - run: sudo apt-get install expect
       - run: sudo apt-get install npm
       - run: sudo npm install
-      - run: echo ./
-      - run: ./../../script.exp
+      - run: ls -all
+      - run: ./script.exp
 
