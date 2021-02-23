@@ -16,7 +16,10 @@ jobs:
       - run: sudo apt-get install -y build-essential checkinstall libssl-dev
       - run: sudo apt-get install -y expect
       - run: sudo apt-get install npm
-      - run: sudo npm install
+      - name: install npm
+        run: |
+          cd ./web
+          sudo npm install
       - run: sudo npm i -g @angular/cli
       - name: build ng app
         run: |
