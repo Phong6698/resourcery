@@ -16,26 +16,19 @@ jobs:
       - run: sudo apt-get install -y build-essential checkinstall libssl-dev
       - run: sudo apt-get install -y expect
 
-      #      - name: Install Dependencies
-      #        run: npm ci --prefix web
-      #
-      #      - name: Build
-      #        if: success()
-      #        run: |
-      #          npm run build.back4app --prefix web
+      - name: Install Dependencies
+        run: npm ci --prefix web
 
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "$B4A_ACCOUNT_KEY"
-          replace: "uqsxZBiWbGfr6X8NBCGU8qMgyB7Z5cmgZM3KDk7P"
-          include: "script.exp"
+      - name: Build
+        if: success()
+        run: |
+          npm run build.back4app --prefix web
 
       - name: Result 1
         run: cat script.exp
 
       - name: Find and Replace Token
-        run: find script.exp -type f -exec sed -i ''s/#{B4A_ACCOUNT_KEY}#/uqsxZBiWbGfr6X8NBCGU8qMgyB7Z5cmgZM3KDk7P/g'' {} \;
+        run: find script.exp -type f -exec sed -i ''s/#{B4A_ACCOUNT_KEY}#/${{ secrets.B4A_ACCOUNT_KEY }}/g'' {} \;
 
       - name: Result 2
         run: cat script.exp
