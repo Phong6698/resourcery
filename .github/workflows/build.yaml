@@ -23,8 +23,8 @@ jobs:
           echo show directory 1:
           ls -a ./
           echo show directory 2:
-          echo ${env:PATH}
+          ls -a ../
           echo show directory 2:
           ls -a ../resourcery/
           echo run script:
-          expect ../resourcery/scripts/script.exp
+          expect ./scripts/script.exp
