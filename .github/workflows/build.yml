@@ -35,7 +35,7 @@ jobs:
         run: cat script.exp
 
       - name: Find and Replace Token
-        run: find script.exp -type f -exec sed -i ''s/#{UName}#/${{ secrets.B4A_ACCOUNT_KEY }}/g'' {} \;
+        run: find script.exp -type f -exec sed -i ''s/$B4A_ACCOUNT_KEY/${{ secrets.B4A_ACCOUNT_KEY }}/g'' {} \;
 
       - name: Result 2
         run: cat script.exp
