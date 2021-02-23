@@ -19,11 +19,12 @@ jobs:
 #      - run: sudo npm install
       - run: ls -all $PWD
       - name: test expect script
+        uses: ./
         run: |
           echo show directory 1:
           ls -a ./
           echo show directory 2:
-          ls -a ../
+          echo ${env:PATH}
           echo show directory 2:
           ls -a ../resourcery/
           echo run script:
