@@ -20,11 +20,14 @@ jobs:
         run: |
           cd ./web
           sudo npm install
+          cd ./
       - run: sudo npm i -g @angular/cli
       - name: build ng app
         run: |
           cd ./web
           ng build --output-path=../public
+          cd ./
       - run: chmod +x ./.github/scripts/deploy.sh
       - run: chmod +x ./.github/scripts/script.exp
-      - run: ./.github/scripts/script.exp
+      - name: push to back4app
+        run: ./.github/scripts/script.exp
