@@ -43,7 +43,6 @@ if {$force_conservative} {
 
 
 set timeout -1
-sudo chmod +x ./.github/scripts/deploy.sh
 spawn ./.github/scripts/deploy.sh
 match_max 100000
 expect -exact "\r
