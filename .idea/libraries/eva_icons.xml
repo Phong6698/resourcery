@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="eva-icons">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/web/node_modules/eva-icons/eva-icons.zip!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
