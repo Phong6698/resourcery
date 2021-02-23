@@ -2,6 +2,8 @@ name: Deployment
 
 on:
   push:
+    branches:
+      - feature/pipeline
   pull_request:
 
 jobs:
