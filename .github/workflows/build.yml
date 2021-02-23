@@ -18,7 +18,9 @@ jobs:
       - run: sudo apt-get install npm
       - run: sudo npm install
       - run: sudo npm i -g @angular/cli
-      - run: ng build --output-path=../public
+      - name: build ng app
+        run: cd ./web
+        ng build --output-path=../public
       - run: chmod +x ./.github/scripts/deploy.sh
       - run: chmod +x ./.github/scripts/script.exp
       - run: ./.github/scripts/script.exp
