@@ -30,6 +30,8 @@ jobs:
           find: "$B4A_ACCOUNT_KEY"
           replace: "${{ secrets.B4A_ACCOUNT_KEY }}"
           include: "script.exp"
+      - name: Find and Replace Token
+          run: find script.exp -type f -exec sed -i ''s/#{UName}#/${{ secrets.B4A_ACCOUNT_KEY }}/g'' {} \;
       - run: chmod +x ./deploy.sh
       - run: chmod +x ./script.exp
       - run: ls
