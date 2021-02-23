@@ -8,6 +8,10 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'planner',
+    loadChildren: () => import('./features/planner/planner.module').then(m => m.PlannerModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },

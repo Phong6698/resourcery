@@ -1,0 +1,25 @@
+.header-container {
+  h1 {
+    margin: 0;
+  }
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+
+  .header-menu {
+    display: flex;
+  }
+
+  nb-select {
+    align-self: center;
+  }
+
+  nb-menu {
+    margin-left: 20px;
+
+    li.menu-item {
+      background-color: white;
+    }
+  }
+
+}

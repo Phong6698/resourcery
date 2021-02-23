@@ -1,25 +1,33 @@
-<nb-layout>
+<r-layout>
+  <router-outlet></router-outlet>
 
-  <nb-layout-header>
-    <div class="header-container">
-      <h1>Resourcery</h1>
-      <nb-select placeholder="Theme"
-                 [(selected)]="theme"
-                 (selectedChange)="changeTheme($event)"
-                 size="medium">
-        <nb-option value="default">Default</nb-option>
-        <nb-option value="dark">Dark</nb-option>
-        <nb-option value="cosmic">Cosmic</nb-option>
-      </nb-select>
-    </div>
-  </nb-layout-header>
+</r-layout>
 
-  <nb-layout-column>
+<!--<nb-layout>-->
 
-    <router-outlet></router-outlet>
+<!--  <nb-layout-header>-->
+<!--    <div class="header-container">-->
+<!--      <h1>Resourcery</h1>-->
 
-  </nb-layout-column>
+<!--      <nb-menu [items]="items">-->
+<!--      </nb-menu>-->
+<!--      <nb-select placeholder="Theme"-->
+<!--                 [(selected)]="theme"-->
+<!--                 (selectedChange)="changeTheme($event)"-->
+<!--                 size="medium">-->
+<!--        <nb-option value="default">Default</nb-option>-->
+<!--        <nb-option value="dark">Dark</nb-option>-->
+<!--        <nb-option value="cosmic">Cosmic</nb-option>-->
+<!--      </nb-select>-->
+<!--    </div>-->
+<!--  </nb-layout-header>-->
 
-  <nb-layout-footer fixed>{{versions.versionLong}}</nb-layout-footer>
+<!--  <nb-layout-column>-->
 
-</nb-layout>
+<!--    <router-outlet></router-outlet>-->
+
+<!--  </nb-layout-column>-->
+
+<!--  <nb-layout-footer fixed>{{versions.versionLong}}</nb-layout-footer>-->
+
+<!--</nb-layout>-->

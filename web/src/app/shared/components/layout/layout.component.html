@@ -1,0 +1,31 @@
+<nb-layout>
+
+  <nb-layout-header>
+    <div class="header-container">
+
+      <div class="header-menu">
+        <h1>Resourcery</h1>
+        <nb-menu class="menu-horizontal" [items]="items">
+        </nb-menu>
+      </div>
+      <nb-select placeholder="Theme"
+                 [(selected)]="theme"
+                 (selectedChange)="changeTheme($event)"
+                 size="medium">
+        <nb-option value="default">Default</nb-option>
+        <nb-option value="dark">Dark</nb-option>
+        <nb-option value="cosmic">Cosmic</nb-option>
+      </nb-select>
+
+    </div>
+  </nb-layout-header>
+
+  <nb-layout-column>
+
+    <ng-content></ng-content>
+
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>{{versions.versionLong}}</nb-layout-footer>
+
+</nb-layout>

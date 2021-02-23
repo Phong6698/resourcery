@@ -6,3 +6,19 @@
   @include nb-theme-global();
 };
 /* You can add global styles to this file, and also import other style files */
+
+
+/***horizonal menu option
+https://github.com/akveo/nebular/issues/409
+**/
+nb-menu.menu-horizontal {
+  .menu-item > .menu-items > .menu-item {
+    float: none;
+  }
+  ul {
+    li {
+      float: left;
+      border-bottom: none !important;
+    }
+  }
+}

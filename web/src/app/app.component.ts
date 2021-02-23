@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   theme = 'dark';
 
   constructor(
-    private nbThemeService: NbThemeService
+    // private nbThemeService: NbThemeService
   ) {
   }
 
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     query.findAll().then(console.log);
   }
 
-  changeTheme($event: string): void {
-    this.nbThemeService.changeTheme($event);
-  }
+  // changeTheme($event: string): void {
+  //   this.nbThemeService.changeTheme($event);
+  // }
 }

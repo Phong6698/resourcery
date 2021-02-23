@@ -4,13 +4,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NbButtonModule, NbLayoutModule, NbSelectModule, NbThemeModule} from '@nebular/theme';
-import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {CoreModule} from './core/core.module';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
 import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
 import {environment} from '../environments/environment';
 import {HomeComponent} from './home/home.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,14 +20,10 @@ import {HomeComponent} from './home/home.component';
     CoreModule,
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({name: 'dark'}),
-    NbLayoutModule,
-    NbEvaIconsModule,
-    NbSelectModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
-    NbButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
