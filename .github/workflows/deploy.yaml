@@ -1,0 +1,27 @@
+name: Node.js CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
+      - run: apt-get update
+      - run: apt-get install build-essential checkinstall libssl-dev
+      - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+      - run: apt-get install expect
+      - run: apt-get install nodejs-legacy
+      - run: apt-get install npm
+      - run: npm install
+      - run: nvm install node
+      - run: ./script.exp
