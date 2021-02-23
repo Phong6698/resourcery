@@ -9,14 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo $PWD
-      - run: ls -all
-      - run: ../script.exp
-#      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
-#      - run: sudo apt-get update
-#      - run: sudo apt-get install build-essential checkinstall libssl-dev
-#      - run: sudo apt-get install expect
-#      - run: sudo apt-get install npm
-#      - run: sudo npm install
-
+      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
+      - run: sudo apt-get update
+      - run: sudo apt-get install build-essential checkinstall libssl-dev
+      - run: sudo apt-get install expect
+      - run: sudo apt-get install npm
+      - run: sudo npm install
+      - run: script.exp
 
