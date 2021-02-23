@@ -15,4 +15,6 @@ jobs:
       - run: sudo apt-get install -y expect
       - run: sudo apt-get install npm
       - run: sudo npm install
-      - run: /home/runner/work/{repo-name}/{repo-name}/script.exp
+      - run: |
+        chmod +x "${GITHUB_WORKSPACE}/script.exp"
+        "${GITHUB_WORKSPACE}/script.exp"
