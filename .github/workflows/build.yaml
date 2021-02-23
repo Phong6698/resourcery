@@ -23,4 +23,4 @@ jobs:
           echo show directory:
           ls -a
           echo run script:
-          expect scripts/script.exp
+          expect ../scripts/script.exp
