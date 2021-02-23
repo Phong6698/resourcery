@@ -11,10 +11,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y build-essential checkinstall libssl-dev
-      - run: sudo apt-get install -y expect
 
       - name: Install Dependencies
         run: npm ci --prefix web
@@ -24,17 +20,24 @@ jobs:
         run: |
           npm run build.back4app --prefix web
 
-      - name: Result 1
-        run: cat script.exp
+      - name: Install Back4App CLI
+        if: success()
+        run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
 
-      - name: Find and Replace Token
+      - name: Install expect
+        if: success()
+        run: sudo apt-get install -y expect
+
+      - name: Replace B4A_ACCOUNT_KEY
+        if: success()
         run: find script.exp -type f -exec sed -i ''s/#{B4A_ACCOUNT_KEY}#/${{ secrets.B4A_ACCOUNT_KEY }}/g'' {} \;
 
-      - name: Result 2
-        run: cat script.exp
+      - name: File Permissions
+        if: success()
+        run: |
+          chmod +x ./deploy.sh
+          chmod +x ./script.exp
 
-      - run: chmod +x ./deploy.sh
-      - run: chmod +x ./script.exp
-      - run: ls
-      - name: push to back4app
+      - name: Deploy to Back4App
+        if: success()
         run: expect script.exp
