@@ -15,7 +15,6 @@ jobs:
       - run: sudo apt-get install build-essential checkinstall libssl-dev
       - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
       - run: sudo apt-get install expect
-      - run: sudo apt-get install nodejs-legacy
       - run: sudo apt-get install npm
       - run: npm install
       - run: nvm install node
