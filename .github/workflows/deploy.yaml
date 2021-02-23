@@ -15,4 +15,4 @@ jobs:
       - run: sudo apt-get install -y expect
       - run: sudo apt-get install npm
       - run: sudo npm install
-      - run: ./.github/script.exp
+      - run: expect ./.github/script.exp
