@@ -11,7 +11,7 @@ jobs:
     steps:
       - run: echo $PWD
       - run: ls -all
-      - run: script.exp
+      - run: ../script.exp
 #      - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
 #      - run: sudo apt-get update
 #      - run: sudo apt-get install build-essential checkinstall libssl-dev
