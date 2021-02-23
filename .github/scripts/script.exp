@@ -54,4 +54,4 @@ Account Key: "
 send -- "SEAXG69zkGB6ezGGQHV4B64hvTJjMLnyBkmZZjAJ"
 expect -exact "SEAXG69zkGB6ezGGQHV4B64hvTJjMLnyBkmZZjAJ"
 send -- "\r"
-expect eof
+interact
