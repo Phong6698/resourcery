@@ -51,7 +51,7 @@ NOTE: on pressing ENTER we'll try to open the url:\r
    \"http://dashboard.back4app.com/classic#/wizard/account-key\"\r
 in default browser.\r
 Account Key: "
-send -- "SEAXG69zkGB6ezGGQHV4B64hvTJjMLnyBkmZZjAJ"
-expect -exact "SEAXG69zkGB6ezGGQHV4B64hvTJjMLnyBkmZZjAJ"
+send -- "uqsxZBiWbGfr6X8NBCGU8qMgyB7Z5cmgZM3KDk7P"
+expect -exact "uqsxZBiWbGfr6X8NBCGU8qMgyB7Z5cmgZM3KDk7P"
 send -- "\r"
-interact
+expect eof
