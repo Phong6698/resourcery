@@ -15,7 +15,8 @@ jobs:
       - run: sudo apt-get install -y expect
       - run: sudo apt-get install npm
       - run: sudo npm install
+      - run: sudo chmod +x ./script.exp
+      - run: sudo chmod +x ./deploy.sh
       - name: expect script
-        run: |
-        chmod +x ./script.exp
-        ./script.exp
+        run: ./script.exp
+        shell: expect
