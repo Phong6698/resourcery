@@ -24,11 +24,7 @@ jobs:
           ls -a ./
           echo show directory 2:
           ls -a ../
-          echo show directory 3:
-          ls -a ./scripts
-          echo show directory 4:
-          ls -a ../../
-          echo show directory 5:
-          ls -a ../../../
+          echo show directory 2:
+          ls -a ../resourcery/
           echo run script:
-          expect ./scripts/script.exp
+          expect ../resourcery/scripts/script.exp
