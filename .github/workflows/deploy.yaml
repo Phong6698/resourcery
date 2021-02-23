@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Deployment
 
 on:
   push:
@@ -13,8 +13,8 @@ jobs:
       - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
       - run: sudo apt-get update
       - run: sudo apt-get install build-essential checkinstall libssl-dev
-      - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
       - run: sudo apt-get install expect
       - run: sudo apt-get install npm
       - run: sudo npm install
-      - run: ./script.exp
+      - run: /../../script.exp
+
