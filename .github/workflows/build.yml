@@ -19,14 +19,4 @@ jobs:
       - run: sudo apt-get install -y expect
 #      - run: sudo apt-get install npm
 #      - run: sudo npm install
-      - run: ls -all $PWD
-      - name: test expect script
-        run: |
-          echo show directory 1:
-          ls -a ./
-          echo show directory 2:
-          ls -a ../
-          echo show directory 2:
-          ls -a ../resourcery/
-          echo run script:
-          expect ./scripts/script.exp
+      - run: expect ./.github/scripts/script.exp
