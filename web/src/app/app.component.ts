@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import versions from 'src/_versions';
-import {NbThemeService} from '@nebular/theme';
 import * as Parse from 'parse';
 
 @Component({
@@ -10,12 +8,7 @@ import * as Parse from 'parse';
 })
 export class AppComponent implements OnInit {
 
-  versions = versions;
-  theme = 'dark';
-
-  constructor(
-    // private nbThemeService: NbThemeService
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -38,7 +31,4 @@ export class AppComponent implements OnInit {
     query.findAll().then(console.log);
   }
 
-  // changeTheme($event: string): void {
-  //   this.nbThemeService.changeTheme($event);
-  // }
 }
