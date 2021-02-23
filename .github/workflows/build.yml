@@ -26,5 +26,6 @@ jobs:
 
       #      - run: chmod +x ./.github/scripts/deploy.sh
       #      - run: chmod +x ./.github/scripts/script.exp
+      - run: ls
       - name: push to back4app
         run: script.exp
