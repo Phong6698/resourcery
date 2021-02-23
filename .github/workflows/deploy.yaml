@@ -11,9 +11,8 @@ jobs:
     steps:
       - run: curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
       - run: sudo apt-get update
-      - run: sudo apt-get install build-essential checkinstall libssl-dev
-      - run: sudo apt-get install expect
+      - run: sudo apt-get install -y build-essential checkinstall libssl-dev
+      - run: sudo apt-get install -y expect
       - run: sudo apt-get install npm
       - run: sudo npm install
       - run: expect script.exp
-
