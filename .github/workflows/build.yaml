@@ -19,7 +19,6 @@ jobs:
 #      - run: sudo npm install
       - run: ls -all $PWD
       - name: test expect script
-        uses: ./
         run: |
           echo show directory 1:
           ls -a ./
