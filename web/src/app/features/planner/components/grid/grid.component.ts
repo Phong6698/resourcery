@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 
 @Component({
   selector: 'r-grid',
@@ -12,6 +12,8 @@ export class GridComponent implements OnInit {
   resources: any[] = [
     'Miro', 'Phong', 'Yves'
   ];
+
+  @ViewChildren('renderedDays') renderedDays!: QueryList<ElementRef>;
 
   months: any[] = [
     new Month('Jan', 1, new Array(31)),
@@ -31,6 +33,11 @@ export class GridComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public jumpToday(): void {
+
+    const element = this.renderedDays.find(el => el.nativeElement.getAttribute('data-day-ident') === '2-20');
+    element?.nativeElement.scrollIntoView({behavior: 'smooth', block: 'end'});
+  }
 }
 
 class Month {

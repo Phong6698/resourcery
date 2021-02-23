@@ -1,3 +1,5 @@
+<button nbButton (click)="jumpToday()">Today</button>
+
 <div class="container">
 
   <div class="sidenav">
@@ -10,7 +12,10 @@
       <div class="months" *ngFor="let month of months, let i = index">
         <div class="month">{{month.name}}</div>
         <div class="days">
-          <div class="day" *ngFor="let day of month.days, let y = index">
+          <div class="day"
+               #renderedDays
+               [attr.data-day-ident]="month.ident + '-' + (y + 1)"
+               *ngFor="let day of month.days, let y = index">
             {{ y + 1}}
           </div>
         </div>
