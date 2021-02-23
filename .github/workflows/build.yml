@@ -16,15 +16,15 @@ jobs:
       - run: sudo apt-get install -y build-essential checkinstall libssl-dev
       - run: sudo apt-get install -y expect
 
-      - name: Install Dependencies
-        run: npm ci --prefix web
-
-      - name: Build
-        if: success()
-        run: |
-          npm run build.back4app --prefix web
+      #      - name: Install Dependencies
+      #        run: npm ci --prefix web
+      #
+      #      - name: Build
+      #        if: success()
+      #        run: |
+      #          npm run build.back4app --prefix web
 
       #      - run: chmod +x ./.github/scripts/deploy.sh
       #      - run: chmod +x ./.github/scripts/script.exp
       - name: push to back4app
-        run: .github/scripts/script.exp
+        run: script.exp
