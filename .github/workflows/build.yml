@@ -18,4 +18,4 @@ jobs:
       - run: sudo apt-get install npm
       - run: sudo npm install
       - run: chmod +x ./.github/scripts/deploy.sh
-      - run: expect ./.github/scripts/script.exp
+      - run: ./.github/scripts/script.exp
