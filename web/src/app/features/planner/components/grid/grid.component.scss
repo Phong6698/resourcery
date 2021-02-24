@@ -1,4 +1,6 @@
 .container {
+  margin-top: 50px;
+
   display: flex;
   height: 100vh;
 
@@ -40,6 +42,7 @@
 
   .month-slot{
     display: flex;
+    position: relative;
 
   }
 
@@ -78,5 +81,6 @@
    width: 50px;
    position: absolute;
    touch-action: none;
+    z-index: 10;
   }
 }

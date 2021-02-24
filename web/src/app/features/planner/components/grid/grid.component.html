@@ -9,26 +9,23 @@
 
   <div class="scheduler">
     <div class="schedule-row">
-      <div class="months" *ngFor="let month of months, let i = index">
-        <div class="month">{{month.name}}</div>
+<!--        <div class="month">January</div>-->
         <div class="days">
           <div class="day"
                #renderedDays
-               [attr.data-day-ident]="month.ident + '-' + (y + 1)"
-               *ngFor="let day of month.days, let y = index">
+               [attr.data-day-ident]="(y + 1)"
+               *ngFor="let day of days, let y = index">
             {{ y + 1}}
           </div>
         </div>
-      </div>
     </div>
 
     <div class="schedule-row" *ngFor="let resource of resources">
-    <div class="month-slot" *ngFor="let month of months, let i = index">
+    <div class="month-slot">
       <div class="day-slot"
            (click)="slotClicked($event)"
            [attr.data-day]="y + 1"
-           [attr.data-month]="month.ident"
-           *ngFor="let day of month.days, let y = index">
+           *ngFor="let day of days, let y = index">
         {{ y + 1}}
       </div>
     </div>
