@@ -1,6 +1,9 @@
 import {Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren} from '@angular/core';
-import * as interact from 'interactjs';
+import * as interactLib from 'interactjs';
 import {Element} from '@angular/compiler';
+
+
+const interact: any = interactLib;
 
 @Component({
   selector: 'r-grid',
@@ -65,36 +68,52 @@ export class GridComponent implements OnInit {
 
     const position = { x: 0, y: 0 };
 
-    // @ts-ignore
+
+
     interact(d)
       .resizable({
-        edges: {left: true, right: true, bottom: false, top: false},
+        inertia: false,
+        edges: {left: true, right: true, bottom: false, top: true},
         listeners: {
           // tslint:disable-next-line:typedef no-shadowed-variable
           move(event) {
-            let { x, y } = event.target.dataset
+            const target = event.target;
+            let x = (parseFloat(target.getAttribute('data-x')) || 0);
+            let y = (parseFloat(target.getAttribute('data-y')) || 0);
 
-            x = (parseFloat(x) || 0) + event.deltaRect.left
-            y = (parseFloat(y) || 0) + event.deltaRect.top
+            // update the element's style
+            target.style.width = event.rect.width + 'px'
+            target.style.height = event.rect.height + 'px'
 
-            Object.assign(event.target.style, {
-              width: `${event.rect.width}px`,
-              height: `${event.rect.height}px`,
-              transform: `translate(${x}px, ${y}px)`
-            })
+            // translate when resizing from top or left edges
+            x += event.deltaRect.left;
+            y += event.deltaRect.top;
 
-            Object.assign(event.target.dataset, { x, y })
+            target.style.webkitTransform = target.style.transform =
+              'translate(' + x + 'px,' + y + 'px)';
+
+            target.setAttribute('data-x', x);
+            target.setAttribute('data-y', y);
+            target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
           }
         },
         modifiers: [
-          // @ts-ignore
+          interact.modifiers.restrictSize({
+            min: { width: 50, height: 50 }
+          }),
+          interact.modifiers.restrictEdges({
+            outer: 'parent'
+          }),
           interact.modifiers.snapEdges({
-            targets: this.makeGrid(event.target)
+            targets: [
+              interact.snappers.grid({ top: 100, left: 400 })
+            ]
           })
         ],
 
       })
       .draggable({
+        listeners: { move: this.dragMoveListener },
         // modifiers: [
         //   // @ts-ignore
         //   interact.modifiers.snapEdges({
@@ -114,21 +133,6 @@ export class GridComponent implements OnInit {
           elementRect: {top: 0, left: 0, bottom: 1, right: 1}
         },
         // enable autoScroll
-        autoScroll: true,
-        listeners: {
-          // tslint:disable-next-line:typedef no-shadowed-variable
-          start(event) {
-            console.log(event.type, event.target);
-          },
-          // tslint:disable-next-line:typedef no-shadowed-variable
-          move(event) {
-            position.x += event.dx;
-            position.y += event.dy;
-
-            event.target.style.transform =
-              `translate(${position.x}px, ${position.y}px)`
-          },
-        }
 
         // // call this function on every dragmove event
         // onmove: this.dragMoveListener,
@@ -207,7 +211,8 @@ export class GridComponent implements OnInit {
       const rect = el.getBoundingClientRect();
       // targets.push({x: rect.left - 30, y: rect.top + 30});
       // @ts-ignore
-      targets.push(interact.snappers.grid({x: rect.left - 30, y: rect.top + 30}));
+      targets.push(interact.createSnapGrid({x: rect.left, y: rect.top}));
+      // targets.push(interact.snappers.grid({left: rect.left - 30, top: rect.top + 30}));
 
 
     });
