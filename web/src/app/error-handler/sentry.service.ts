@@ -25,7 +25,7 @@ export class SentryService implements ErrorHandler {
     });
 
     const evendId = Sentry.captureException(error.originalError || error);
-    if (environment.production || !environment.production) {
+    if (environment.production) {
       Sentry.showReportDialog({ evendId });
     }
 
