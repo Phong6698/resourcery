@@ -1,0 +1,42 @@
+<nb-card class="dialog-card">
+  <nb-card-header>
+    <h3>{{isEdit ? 'Edit ' + firstname.value : 'New Resource'}}</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="input-form">
+      <label for="firstname" class="label">Firstname</label>
+      <input id="firstname"
+             type="text"
+             nbInput
+             placeholder="Firstname"
+             [formControl]="firstname"
+             fullWidth>
+    </div>
+    <div class="input-form">
+      <label for="lastname" class="label">Lastname</label>
+      <input id="lastname"
+             type="text"
+             nbInput
+             placeholder="Lastname"
+             [formControl]="lastname"
+             fullWidth>
+    </div>
+    <div class="input-form">
+      <label class="label">Type</label>
+      <p>{{type.value}}</p>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="basic" (click)="cancel()">Cancel</button>
+    <button *ngIf="!isEdit" nbButton status="success" (click)="create()" [disabled]="newResourceForm.invalid">
+      Create Resource
+    </button>
+    <button *ngIf="isEdit"
+            nbButton
+            status="success"
+            (click)="save()"
+            [disabled]="newResourceForm.invalid || this.newResourceForm.pristine">
+      Save Resource
+    </button>
+  </nb-card-footer>
+</nb-card>
