@@ -17,9 +17,7 @@ jobs:
 
       - name: Build
         if: success()
-        run: |
-          npm run prebuild --prefix web
-          npm run build.back4app --prefix web
+        run: npm run build.back4app --prefix web
 
       - name: Install Back4App CLI
         if: success()
