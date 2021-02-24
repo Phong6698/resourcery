@@ -15,12 +15,12 @@ export class SentryService implements ErrorHandler {
   }
 
   handleError(error: any): void {
-    const user = this.userStore.getValue();
+    const {id, username, email} = this.userStore.getValue();
     Sentry.configureScope(scope => {
       scope.setUser({
-        id: user.id,
-        username: user.username,
-        email: user.email,
+        id,
+        username,
+        email,
       });
     });
 
