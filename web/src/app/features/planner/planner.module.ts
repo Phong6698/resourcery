@@ -9,7 +9,8 @@ import * as components from './components';
 @NgModule({
   declarations: [
     ...components.list,
-    PlannerComponent],
+    PlannerComponent,
+  ],
   imports: [
     SharedModule,
     PlannerRoutingModule

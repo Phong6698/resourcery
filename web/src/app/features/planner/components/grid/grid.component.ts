@@ -53,11 +53,7 @@ export class GridComponent implements OnInit {
 
     const d = this.renderer.createElement('div');
 
-    this.renderer.setStyle(d, 'background-color', 'red');
-    this.renderer.setStyle(d, 'height', '50px');
-    this.renderer.setStyle(d, 'width', '50px');
-    this.renderer.setStyle(d, 'position', 'absolute');
-    this.renderer.setStyle(d, 'touch-action', 'none');
+    this.renderer.addClass(d, 'draggable');
     this.renderer.setStyle(d, 'left', rect.left + 'px');
     this.renderer.setStyle(d, 'top', (rect.top + 6) + 'px');
     // @ts-ignore
@@ -73,7 +69,7 @@ export class GridComponent implements OnInit {
     interact(d)
       .resizable({
         inertia: false,
-        edges: {left: true, right: true, bottom: false, top: true},
+        edges: {left: true, right: true, bottom: false, top: false},
         listeners: {
           // tslint:disable-next-line:typedef no-shadowed-variable
           move(event) {
@@ -98,17 +94,23 @@ export class GridComponent implements OnInit {
           }
         },
         modifiers: [
-          interact.modifiers.restrictSize({
-            min: { width: 50, height: 50 }
-          }),
+          // interact.modifiers.restrictSize({
+          //   min: { width: 50, height: 50 }
+          // }),
           interact.modifiers.restrictEdges({
             outer: 'parent'
           }),
           interact.modifiers.snapEdges({
-            targets: [
-              interact.snappers.grid({ top: 100, left: 400 })
-            ]
-          })
+            targets: this.makeGridXY(event.target),
+            range: Infinity,
+          }),
+          // interact.modifiers.snap({
+          //   targets: [
+          //     interact.snappers.grid(this.makeGridXY(event.target))
+          //   ],
+          //   range: Infinity,
+          //   relativePoints: [ { x: 0, y: 0 } ]
+          // }),
         ],
 
       })
@@ -200,8 +202,7 @@ export class GridComponent implements OnInit {
     target.setAttribute('data-y', y);
   }
 
-  private makeGrid(clickedDaySlot: EventTarget): { x, y }[] {
-
+  private makeGrid(clickedDaySlot: EventTarget): { left, top }[] {
     // @ts-ignore
     const parent = clickedDaySlot.parentNode;
     const targets = [];
@@ -209,17 +210,24 @@ export class GridComponent implements OnInit {
     [...parent.children].map((el: Element) => {
       // @ts-ignore
       const rect = el.getBoundingClientRect();
-      // targets.push({x: rect.left - 30, y: rect.top + 30});
-      // @ts-ignore
-      targets.push(interact.createSnapGrid({x: rect.left, y: rect.top}));
-      // targets.push(interact.snappers.grid({left: rect.left - 30, top: rect.top + 30}));
-
-
+      targets.push(interact.snappers.grid({left: rect.left}));
     });
-
     console.log(targets);
     return targets;
+  }
 
+  private makeGridXY(clickedDaySlot: EventTarget): { left, top }[] {
+    // @ts-ignore
+    const parent = clickedDaySlot.parentNode;
+    const targets = [];
+
+    [...parent.children].map((el: Element) => {
+      // @ts-ignore
+      const rect = el.getBoundingClientRect();
+      targets.push(interact.snappers.grid({x: rect.left, y: rect.top}));
+    });
+    console.log(targets);
+    return targets;
   }
 }
 
