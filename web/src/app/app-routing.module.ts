@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/planner/planner.module').then(m => m.PlannerModule)
   },
   {
+    path: 'resources',
+    loadChildren: () => import('./features/resources/resources.module').then(m => m.ResourcesModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },

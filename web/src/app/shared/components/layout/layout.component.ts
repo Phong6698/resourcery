@@ -13,11 +13,11 @@ export class LayoutComponent implements OnInit {
   theme = 'dark';
 
   items: NbMenuItem[] = [
-    {title: 'Dashboard', link: 'home'},
-    {title: 'Planner', link: 'planner'},
-    {title: 'Minions'},
+    {title: 'Dashboard', link: '/home'},
+    {title: 'Planner', link: '/planner'},
+    {title: 'Minions', link: '/resources'},
     {title: 'Projects'},
-    ];
+  ];
   constructor(
     private nbThemeService: NbThemeService
   ) {
