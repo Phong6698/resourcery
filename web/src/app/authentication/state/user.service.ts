@@ -23,7 +23,7 @@ export class UserService {
     await Parse.User.logOut();
     this.userStore.reset();
     this.userStore.setLoading(false);
-    return this.router.navigate(['/auth', 'login']); // TODO remove tippfehler
+    return this.router.navigate(['/auth', 'login']);
   }
 
   async register(user: Partial<UserState>): Promise<any> {

@@ -9,7 +9,8 @@ export class SentryService implements ErrorHandler {
 
   constructor( private userStore: UserStore) {
     Sentry.init({
-      dsn: 'https://e12b3b494fa7473f8af35bb0df85b59c@o386758.ingest.sentry.io/5650059',
+      // dsn: 'http://32cd7241036c4c309e748858c577d962@localhost:9000/2' - local
+      dsn: 'https://e12b3b494fa7473f8af35bb0df85b59c@o386758.ingest.sentry.io/5650059'
     });
   }
 
