@@ -10,6 +10,7 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
 import {environment} from '../environments/environment';
 import {HomeComponent} from './home/home.component';
 import {SharedModule} from './shared/shared.module';
+import {NbDialogModule} from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,11 @@ import {SharedModule} from './shared/shared.module';
     BrowserAnimationsModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
+    NbDialogModule.forChild(),
+
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

@@ -1,1 +1,4 @@
-<p>resources works!</p>
+<r-resource-list [resources]="resources$ | async"
+                 (createResource)="createResource()"
+                 (editResource)="editResource($event)"
+                 (deleteResource)="deleteResource($event)"></r-resource-list>

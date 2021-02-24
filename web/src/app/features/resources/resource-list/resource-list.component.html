@@ -1,0 +1,22 @@
+<div class="card-container">
+  <nb-card *ngIf="resources">
+    <nb-card-header><h2>Minions</h2></nb-card-header>
+    <nb-list>
+      <nb-list-item *ngFor="let resource of resources; trackBy: trackById">
+        <nb-user name="{{resource.firstname}} {{resource.lastname}}"
+                 [title]="resource.type.toLowerCase()"></nb-user>
+        <button nbButton status="basic" (click)="onEditResource(resource)">
+          <nb-icon icon="edit-outline"></nb-icon>
+        </button>
+        <button nbButton status="danger" (click)="onDeleteResource(resource.id)">
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button>
+      </nb-list-item>
+    </nb-list>
+    <nb-card-footer>
+      <button nbButton status="success" (click)="onCreateResource()">
+        Add new Resource
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</div>
