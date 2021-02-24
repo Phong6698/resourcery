@@ -1,6 +1,5 @@
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -10,6 +9,7 @@ import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
 import {environment} from '../environments/environment';
 import {HomeComponent} from './home/home.component';
 import {SharedModule} from './shared/shared.module';
+import {SentryService} from './error-handler/sentry.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,9 @@ import {SharedModule} from './shared/shared.module';
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
   ],
-  providers: [],
+  providers: [
+    {provide: ErrorHandler, useClass: SentryService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

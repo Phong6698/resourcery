@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // throw new Error('SENTRY TEST ERROR'); // TODO remove
+
   }
 
   async logout(): Promise<any> {
