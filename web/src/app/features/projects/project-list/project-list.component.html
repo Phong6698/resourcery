@@ -1,0 +1,23 @@
+<div class="card-container">
+  <nb-card *ngIf="projects">
+    <nb-card-header><h2>Projects</h2></nb-card-header>
+    <nb-list>
+      <nb-list-item *ngFor="let project of projects; trackBy: trackById">
+        <nb-user name="{{project.name}}"
+                 [title]="project.description.toLowerCase()">
+        </nb-user>
+        <button nbButton status="basic" (click)="onEditProject(project)">
+          <nb-icon icon="edit-outline"></nb-icon>
+        </button>
+        <button nbButton status="danger" (click)="onDeleteProject(project.id)">
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button>
+      </nb-list-item>
+    </nb-list>
+    <nb-card-footer>
+      <button nbButton status="success" (click)="onCreateProject()">
+        Add new Project
+      </button>
+    </nb-card-footer>
+  </nb-card>
+</div>

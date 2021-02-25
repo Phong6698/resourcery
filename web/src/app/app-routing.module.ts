@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/resources/resources.module').then(m => m.ResourcesModule)
   },
   {
+    path: 'projects',
+    loadChildren: () => import('./features/projects/projects.module').then(m => m.ProjectsModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },

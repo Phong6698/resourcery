@@ -1,0 +1,38 @@
+<nb-card class="dialog-card">
+  <nb-card-header>
+    <h3>{{isEdit ? 'Edit ' + name.value : 'New Project'}}</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="input-form">
+      <label for="name" class="label">Name</label>
+      <input id="name"
+             type="text"
+             nbInput
+             placeholder="Name"
+             [formControl]="name"
+             fullWidth>
+    </div>
+    <div class="input-form">
+      <label for="description" class="label">Description</label>
+      <input id="description"
+             type="text"
+             nbInput
+             placeholder="Description"
+             [formControl]="description"
+             fullWidth>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="basic" (click)="cancel()">Cancel</button>
+    <button *ngIf="!isEdit" nbButton status="success" (click)="create()" [disabled]="newProjectForm.invalid">
+      Create Project
+    </button>
+    <button *ngIf="isEdit"
+            nbButton
+            status="success"
+            (click)="save()"
+            [disabled]="newProjectForm.invalid || this.newProjectForm.pristine">
+      Save Project
+    </button>
+  </nb-card-footer>
+</nb-card>
