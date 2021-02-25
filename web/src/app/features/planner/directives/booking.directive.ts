@@ -23,7 +23,7 @@ export class BookingDirective implements AfterViewInit {
     console.log(this.self);
     console.log(this.grid)
     this.renderer.setStyle(this.self.nativeElement, 'left', this.left + 'px');
-    this.renderer.setStyle(this.self.nativeElement, 'top', 0 + 'px');
+    this.renderer.setStyle(this.self.nativeElement, 'top', 10 + 'px');
     this.initInteract();
   }
 
