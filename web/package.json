@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "ts-appversion --git ../",
     "start": "ng serve",
     "prebuild": "ts-appversion --git ../",
     "build": "ng build",
@@ -26,6 +27,10 @@
     "@datorama/akita-ng-router-store": "^6.0.0",
     "@nebular/eva-icons": "7.0.0",
     "@nebular/theme": "^7.0.0",
+    "@saithodev/ts-appversion": "^2.2.0",
+    "@sentry/angular": "^6.2.0",
+    "@sentry/browser": "^6.2.0",
+    "@sentry/tracing": "^6.2.0",
     "eva-icons": "^1.1.2",
     "interactjs": "^1.10.3",
     "parse": "^3.0.0",
