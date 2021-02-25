@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Resource, ResourceQuery} from '../../../resources/state';
 import {Observable} from 'rxjs';
 
@@ -9,6 +9,9 @@ import {Observable} from 'rxjs';
 })
 export class GridComponent implements OnInit {
 
+  @Output()
+  createBooking = new EventEmitter<any>();
+
   days = new Array(31);
   bookings: { left, top }[] = [];
   resources$: Observable<Resource[]> = this.resourceQuery.getWithBookings();
@@ -17,6 +20,10 @@ export class GridComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  onCreate(event): void{
+    this.createBooking.emit(event)
   }
 
 }

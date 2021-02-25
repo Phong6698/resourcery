@@ -1,6 +1,14 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import * as interactLib from 'interactjs';
-import {Booking, createBooking} from '../../state';
 import {Resource} from '../../../resources/state';
 
 const interact: any = interactLib;
@@ -18,6 +26,9 @@ export class PeriodComponent implements AfterViewInit {
   @Input()
   days: number[];
 
+  @Output()
+  createBooking = new EventEmitter<any>();
+
   snapGrid: any[] = [];
 
   componentReady = false;
@@ -28,8 +39,6 @@ export class PeriodComponent implements AfterViewInit {
   }
 
   public slotClicked(event: MouseEvent): void {
-
-    console.log(event);
     // @ts-ignore
     const rect = event.target?.parentNode.getBoundingClientRect();
     console.log(rect);
@@ -37,8 +46,7 @@ export class PeriodComponent implements AfterViewInit {
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    const booking: Booking = createBooking({left: x, top: 0});
-    this.resource.bookings.push(booking);
+    this.createBooking.emit({x, y});
   }
 
   ngAfterViewInit(): void {

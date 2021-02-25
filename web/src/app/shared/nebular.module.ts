@@ -1,6 +1,7 @@
 import {
   NbButtonModule,
   NbCardModule,
+  NbDatepickerModule,
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
@@ -8,21 +9,23 @@ import {
   NbMenuModule,
   NbSelectModule,
   NbThemeModule,
-  NbUserModule
+  NbTimepickerModule,
+  NbUserModule,
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {NgModule} from '@angular/core';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     NbThemeModule.forRoot({name: 'dark'}),
     NbLayoutModule,
     NbEvaIconsModule,
     NbSelectModule,
     NbButtonModule,
-    NbMenuModule.forRoot()
+    NbMenuModule.forRoot(),
+    NbTimepickerModule.forRoot(),
+    NbDatepickerModule.forRoot(),
   ],
   exports: [
     NbThemeModule,
@@ -36,6 +39,8 @@ import {NgModule} from '@angular/core';
     NbUserModule,
     NbIconModule,
     NbInputModule,
+    NbTimepickerModule,
+    NbDatepickerModule
   ]
 })
 export class NebularModule {

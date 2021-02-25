@@ -1,0 +1,46 @@
+<nb-card class="dialog-card">
+  <nb-card-header>
+    <h3>{{isEdit ? 'Edit Booking' : 'New Booking'}}</h3>
+  </nb-card-header>
+  <nb-card-body [formGroup]="form">
+    <div class="input-form">
+      <label for="hours" class="label">Stunden pro Tag</label>
+      <input [nbTimepicker]="timepicker"
+             formControlName="hours"
+             nbInput
+             id="hours"
+             type="text"
+             fullWidth
+      >
+      <nb-timepicker #timepicker></nb-timepicker>
+    </div>
+    <div class="input-form">
+      <label for="daterange" class="label">Zeitraum</label>
+      <input [nbDatepicker]="formpicker"
+             formControlName="daterange"
+             nbInput
+             id="daterange"
+             type="text"
+             fullWidth
+      >
+      <nb-rangepicker #formpicker></nb-rangepicker>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="basic" (click)="cancel()">Cancel</button>
+    <button *ngIf="!isEdit"
+            nbButton
+            status="success"
+            (click)="create()"
+            [disabled]="form.invalid">
+      Create Booking
+    </button>
+    <button *ngIf="isEdit"
+            nbButton
+            status="success"
+            (click)="save()"
+            [disabled]="form.invalid || this.form.pristine">
+      Save Booking
+    </button>
+  </nb-card-footer>
+</nb-card>

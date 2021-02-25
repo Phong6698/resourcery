@@ -8,7 +8,8 @@
 
   <div class="sidenav">
     <div class="filter">filter</div>
-    <div class="resource" *ngFor="let resource of (resources$ | async)">{{resource.firstname}} {{resource.lastname}}</div>
+    <div class="resource" *ngFor="let resource of (resources$ | async)">
+      <nb-user name="{{resource.firstname}} {{resource.lastname}}"></nb-user></div>
   </div>
 
 
@@ -25,7 +26,7 @@
     </div>
 
     <div class="schedule-row" *ngFor="let resource of (resources$ | async)">
-      <r-period [resource]="resource" [days]="days"></r-period>
+      <r-period [resource]="resource" [days]="days" (createBooking)="onCreate($event)"></r-period>
     </div>
   </div>
 
