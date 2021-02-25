@@ -1,0 +1,5 @@
+<r-project-list [projects]="projects$ | async"
+                 (createProject)="createProject()"
+                 (editProject)="editProject($event)"
+                 (deleteProject)="deleteProject($event)">
+</r-project-list>

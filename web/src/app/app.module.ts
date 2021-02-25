@@ -25,8 +25,7 @@ import {SentryService} from './error-handler/sentry.service';
     BrowserAnimationsModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
-    NbDialogModule.forChild(),
-
+    NbDialogModule.forChild()
   ],
   providers: [
     {provide: ErrorHandler, useClass: SentryService}

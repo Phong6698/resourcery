@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
     {title: 'Dashboard', link: '/home'},
     {title: 'Planner', link: '/planner'},
     {title: 'Minions', link: '/resources'},
-    {title: 'Projects'},
+    {title: 'Projects', link: '/projects'},
   ];
   constructor(
     private nbThemeService: NbThemeService
