@@ -2,7 +2,10 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {Subscription} from 'rxjs';
 import {NbDialogService} from '@nebular/theme';
 import {PeriodFormDialogComponent} from './components/period-form-dialog/period-form-dialog.component';
-
+import {AddBooking} from './interfaces/add-booking.interface';
+import * as moment from 'moment';
+import {BookingService} from './state/booking.service';
+import { createBooking } from './state/booking.model';
 @Component({
   selector: 'r-planner',
   templateUrl: './planner.component.html',
@@ -13,17 +16,25 @@ export class PlannerComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  constructor(private nbDialogService: NbDialogService) {
+  constructor(private nbDialogService: NbDialogService, private bookingService: BookingService) {
   }
 
   ngOnInit(): void {
   }
 
-  createBooking(event): void {
-    const windowSub = this.nbDialogService.open(PeriodFormDialogComponent).onClose
-      .subscribe(console.log);
+  createBooking(event: AddBooking): void {
+    const dialogSub = this.nbDialogService.open(PeriodFormDialogComponent)
+      .onClose
+      .subscribe(values => {
+        const booking = createBooking({
+          from: moment(values.daterange.start).format('DD.MM.YYYY'),
+          to: moment(values.daterange.end).format('DD.MM.YYYY')
+        });
 
-    this.subscription.add(windowSub);
+        this.bookingService.create(booking, event.resource);
+
+      });
+    this.subscription.add(dialogSub);
   }
 
   ngOnDestroy(): void {

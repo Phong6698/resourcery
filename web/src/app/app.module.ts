@@ -28,7 +28,7 @@ import {SentryService} from './error-handler/sentry.service';
     NbDialogModule.forChild()
   ],
   providers: [
-    {provide: ErrorHandler, useClass: SentryService}
+    // {provide: ErrorHandler, useClass: SentryService}
   ],
   bootstrap: [AppComponent]
 })

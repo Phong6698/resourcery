@@ -5,6 +5,7 @@ import * as components from './components';
 import {NebularModule} from './nebular.module';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     NebularModule,
+    HttpClientModule,
   ],
   exports: [
     ...components.list,
@@ -24,6 +26,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NebularModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ]
 })
 export class SharedModule {

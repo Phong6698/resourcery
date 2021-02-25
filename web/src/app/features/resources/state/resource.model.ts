@@ -1,5 +1,5 @@
 import {ID} from '@datorama/akita';
-import {Booking} from '../../planner/state';
+import {Booking} from '../../planner/state/booking.model';
 
 export interface Resource {
   id: ID;

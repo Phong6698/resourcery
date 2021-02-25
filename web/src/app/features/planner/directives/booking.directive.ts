@@ -1,7 +1,7 @@
 import {AfterViewInit, Directive, ElementRef, Input, Renderer2} from '@angular/core';
 import * as interactLib from 'interactjs';
-import {Booking} from '../state';
 import * as moment from 'moment';
+import {Booking} from '../state/booking.model';
 
 const interact: any = interactLib;
 

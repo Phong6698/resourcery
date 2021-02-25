@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import * as interactLib from 'interactjs';
 import {Resource} from '../../../resources/state';
+import {AddBooking} from '../../interfaces/add-booking.interface';
 
 const interact: any = interactLib;
 
@@ -27,7 +28,7 @@ export class PeriodComponent implements AfterViewInit {
   days: number[];
 
   @Output()
-  createBooking = new EventEmitter<any>();
+  createBooking = new EventEmitter<AddBooking>();
 
   snapGrid: any[] = [];
 
@@ -46,10 +47,11 @@ export class PeriodComponent implements AfterViewInit {
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    this.createBooking.emit({x, y});
+    this.createBooking.emit({x, y, resource: this.resource});
   }
 
   ngAfterViewInit(): void {
+    console.log(this.resource)
     this.makeGrid();
     this.componentReady = true;
     this.cd.detectChanges();

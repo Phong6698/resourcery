@@ -1,6 +1,7 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Resource, ResourceQuery} from '../../../resources/state';
 import {Observable} from 'rxjs';
+import {AddBooking} from '../../interfaces/add-booking.interface';
 
 @Component({
   selector: 'r-grid',
@@ -10,7 +11,7 @@ import {Observable} from 'rxjs';
 export class GridComponent implements OnInit {
 
   @Output()
-  createBooking = new EventEmitter<any>();
+  createBooking = new EventEmitter<AddBooking>();
 
   days = new Array(31);
   bookings: { left, top }[] = [];
@@ -22,8 +23,8 @@ export class GridComponent implements OnInit {
 
   }
 
-  onCreate(event): void{
-    this.createBooking.emit(event)
+  onCreate(event: AddBooking): void{
+    this.createBooking.emit(event);
   }
 
 }

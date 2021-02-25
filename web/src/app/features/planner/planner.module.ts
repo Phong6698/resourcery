@@ -6,7 +6,6 @@ import {PlannerRoutingModule} from './planner-routing.module';
 import * as components from './components';
 import {BookingDirective} from './directives/booking.directive';
 import {CommonModule} from '@angular/common';
-import {NbDialogModule} from '@nebular/theme';
 
 
 @NgModule({
