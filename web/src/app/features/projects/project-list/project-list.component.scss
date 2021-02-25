@@ -1,0 +1,22 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+
+  nb-card {
+    max-width: 50rem;
+    width: 100%;
+
+    nb-list-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      grid-column-gap: 1em;
+      padding: 1rem 1.5rem;
+    }
+
+    nb-card-footer {
+      display: grid;
+      justify-items: center;
+    }
+  }
+}
