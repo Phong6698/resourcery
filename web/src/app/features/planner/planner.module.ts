@@ -4,11 +4,13 @@ import {SharedModule} from '../../shared/shared.module';
 import {PlannerRoutingModule} from './planner-routing.module';
 
 import * as components from './components';
+import {BookingDirective} from './directives/booking.directive';
 
 
 @NgModule({
   declarations: [
     ...components.list,
+    BookingDirective,
     PlannerComponent,
   ],
   imports: [

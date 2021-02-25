@@ -1,37 +1,34 @@
-<button nbButton (click)="jumpToday()">Today</button>
+<div class="navigator">
+  <button nbButton>Zurück</button>
+  <span class="title">Januar</span>
+  <button nbButton>Weiter</button>
+</div>
 
 <div class="container">
 
   <div class="sidenav">
     <div class="filter">filter</div>
-    <div class="resource" *ngFor="let resource of resources">{{resource}}</div>
+    <div class="resource" *ngFor="let resource of resources">{{resource.name}}</div>
   </div>
+
+
 
   <div class="scheduler">
     <div class="schedule-row">
-<!--        <div class="month">January</div>-->
-        <div class="days">
-          <div class="day"
-               #renderedDays
-               [attr.data-day-ident]="(y + 1)"
-               *ngFor="let day of days, let y = index">
-            {{ y + 1}}
-          </div>
+      <div class="days">
+        <div class="day"
+             #renderedDays
+             [attr.data-day-ident]="(y + 1)"
+             *ngFor="let day of days, let y = index">
+          {{ y + 1}}
         </div>
+      </div>
     </div>
 
     <div class="schedule-row" *ngFor="let resource of resources">
-    <div class="month-slot">
-      <div class="day-slot"
-           (click)="slotClicked($event)"
-           [attr.data-day]="y + 1"
-           *ngFor="let day of days, let y = index">
-        {{ y + 1}}
-      </div>
-    </div>
+      <r-period [resource]="resource" [days]="days"></r-period>
     </div>
   </div>
-
 
 
 </div>

@@ -1,0 +1,23 @@
+.month-slot{
+  display: flex;
+  position: relative;
+
+}
+
+.day-slot{
+  margin: 2px;
+  min-height: 80px;
+  background-color: #303d77;
+  min-width: 40px;
+  max-width: 40px;
+}
+.draggable{
+  border: 2px solid;
+  border-radius: 5px;
+  background-color: #a6c1ff;
+  height:  50px;
+  width: 50px;
+  position: absolute;
+  touch-action: none;
+  z-index: 10;
+}
