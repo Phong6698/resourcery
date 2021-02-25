@@ -1,10 +1,14 @@
 <div class="month-slot" #self>
-  <div rBooking
-       class="draggable"
-       *ngFor="let booking of resource.bookings"
-       [grid]="snapGrid"
-       [left]="booking.left"
-       [top]="booking.top"></div>
+  <ng-container *ngIf="componentReady">
+    <div rBooking
+         class="draggable"
+         *ngFor="let booking of $any(resource.bookings)"
+         [grid]="snapGrid"
+         [period]="self"
+         [booking]="booking">
+    </div>
+  </ng-container>
+
   <div class="day-slot"
        (click)="slotClicked($event)"
        [attr.data-day]="y + 1"

@@ -33,6 +33,7 @@
     "@sentry/tracing": "^6.2.0",
     "eva-icons": "^1.1.2",
     "interactjs": "^1.10.3",
+    "moment": "^2.29.1",
     "parse": "^3.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

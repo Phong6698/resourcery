@@ -1,17 +1,20 @@
 import {AfterViewInit, Directive, ElementRef, Input, Renderer2} from '@angular/core';
 import * as interactLib from 'interactjs';
+import {Booking} from '../state';
+import * as moment from 'moment';
 
 const interact: any = interactLib;
+
 @Directive({
   selector: '[rBooking]',
 })
 export class BookingDirective implements AfterViewInit {
 
   @Input()
-  public top: number;
+  public booking: Booking;
 
   @Input()
-  public left: number;
+  period: HTMLDivElement;
 
   @Input()
   grid: any[];
@@ -20,9 +23,10 @@ export class BookingDirective implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    console.log(this.self);
-    console.log(this.grid)
-    this.renderer.setStyle(this.self.nativeElement, 'left', this.left + 'px');
+    const {left, width} = this.resolvePosition();
+
+    this.renderer.setStyle(this.self.nativeElement, 'width', width + 'px');
+    this.renderer.setStyle(this.self.nativeElement, 'left', left + 'px');
     this.renderer.setStyle(this.self.nativeElement, 'top', 10 + 'px');
     this.initInteract();
   }
@@ -33,8 +37,7 @@ export class BookingDirective implements AfterViewInit {
         inertia: false,
         edges: {left: true, right: true, bottom: false, top: false},
         listeners: {
-          // tslint:disable-next-line:typedef no-shadowed-variable
-          move(event) {
+          move(event): void {
             const target = event.target;
             let x = (parseFloat(target.getAttribute('data-x')) || 0);
             let y = (parseFloat(target.getAttribute('data-y')) || 0);
@@ -81,13 +84,11 @@ export class BookingDirective implements AfterViewInit {
       });
   }
 
-  // tslint:disable-next-line:typedef
-  private dragMoveListener(event: any) {
-    // tslint:disable-next-line:one-variable-per-declaration
-    const target = event.target,
+  private dragMoveListener(event: any): void {
+    const target = event.target;
       // keep the dragged position in the data-x/data-y attributes
-      x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+    const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+    const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
     // translate the element
     target.style.webkitTransform =
@@ -97,6 +98,19 @@ export class BookingDirective implements AfterViewInit {
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+  }
+
+
+  private resolvePosition(): { left, width } {
+    // TODO: Erweiterung für Monatserkennung
+    const parsedDayFrom = +moment(this.booking.from, 'DD.MM.YYYY').format('DD');
+    const parsedDayTo = +moment(this.booking.to, 'DD.MM.YYYY').format('DD');
+
+    const left = 44 * (parsedDayFrom - 1);
+    const width = (44 * parsedDayTo) - left;
+
+    return {left, width};
+
   }
 
 }

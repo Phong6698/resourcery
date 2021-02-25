@@ -8,7 +8,7 @@
 
   <div class="sidenav">
     <div class="filter">filter</div>
-    <div class="resource" *ngFor="let resource of resources">{{resource.name}}</div>
+    <div class="resource" *ngFor="let resource of (resources$ | async)">{{resource.firstname}} {{resource.lastname}}</div>
   </div>
 
 
@@ -17,7 +17,6 @@
     <div class="schedule-row">
       <div class="days">
         <div class="day"
-             #renderedDays
              [attr.data-day-ident]="(y + 1)"
              *ngFor="let day of days, let y = index">
           {{ y + 1}}
@@ -25,7 +24,7 @@
       </div>
     </div>
 
-    <div class="schedule-row" *ngFor="let resource of resources">
+    <div class="schedule-row" *ngFor="let resource of (resources$ | async)">
       <r-period [resource]="resource" [days]="days"></r-period>
     </div>
   </div>

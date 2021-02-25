@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Resource} from '../../models/resource.interface';
+import {Resource, ResourceQuery} from '../../../resources/state';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'r-grid',
@@ -10,13 +11,8 @@ export class GridComponent implements OnInit {
 
   days = new Array(31);
   bookings: { left, top }[] = [];
-  resources: Resource[] = [
-    {name: 'Miro', bookings: []},
-    {name: 'Phong', bookings: []},
-    {name: 'Yves', bookings: []},
-  ];
-
-  constructor() {
+  resources$: Observable<Resource[]> = this.resourceQuery.getWithBookings();
+  constructor(private resourceQuery: ResourceQuery) {
   }
 
   ngOnInit(): void {
