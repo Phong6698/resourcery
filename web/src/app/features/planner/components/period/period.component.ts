@@ -13,6 +13,7 @@ import {Resource} from '../../../resources/state';
 import {AddBooking} from '../../interfaces/add-booking.interface';
 import {ScheduleColumn} from '../../state/schedule/schedule-column.interface';
 import * as moment from 'moment';
+import {DateFormat} from '../../../../shared/types/date.type';
 
 const interact: any = interactLib;
 
@@ -46,7 +47,7 @@ export class PeriodComponent implements AfterViewInit {
 
   public slotClicked(event: MouseEvent): void {
     // @ts-ignore
-    const momentObj = moment(event.target?.dataset.date, 'DD.MM.YYYY');
+    const momentObj = moment(event.target?.dataset.date, DateFormat);
 
     this.createBooking.emit({source: momentObj, resource: this.resource});
   }

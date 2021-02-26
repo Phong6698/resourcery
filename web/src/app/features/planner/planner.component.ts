@@ -5,10 +5,12 @@ import {PeriodFormDialogComponent} from './components/period-form-dialog/period-
 import {AddBooking} from './interfaces/add-booking.interface';
 import * as moment from 'moment';
 import {BookingService} from './state/booking.service';
-import { createBooking } from './state/booking.model';
+import {createBooking} from './state/booking.model';
 import {Resource, ResourceQuery} from '../resources/state';
 import {ScheduleQuery} from './state/schedule/schedule.query';
 import {ScheduleColumn} from './state/schedule/schedule-column.interface';
+import {DateFormat} from '../../shared/types/date.type';
+
 @Component({
   selector: 'r-planner',
   templateUrl: './planner.component.html',
@@ -37,8 +39,8 @@ export class PlannerComponent implements OnInit, OnDestroy {
       .onClose
       .subscribe(values => {
         const booking = createBooking({
-          from: moment(values.daterange.start).format('DD.MM.YYYY'),
-          to: moment(values.daterange.end).format('DD.MM.YYYY')
+          from: moment(values.daterange.start).format(DateFormat),
+          to: moment(values.daterange.end).format(DateFormat)
         });
 
         this.bookingService.create(booking, event.resource);

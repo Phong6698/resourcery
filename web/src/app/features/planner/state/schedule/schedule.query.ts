@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {ScheduleColumn} from './schedule-column.interface';
 import {map} from 'rxjs/operators';
 import * as moment from 'moment';
+import {DateFormat} from '../../../../shared/types/date.type';
 
 @Injectable({providedIn: 'root'})
 export class ScheduleQuery extends Query<ScheduleState> {
@@ -42,7 +43,7 @@ export class ScheduleQuery extends Query<ScheduleState> {
 
   private makeMonths(year: number): moment.Moment[] {
     return this.MONTHS.map(month => {
-      return moment(`${1}.${month}.${year}`, 'DD.MM.YYYY');
+      return moment(`${1}.${month}.${year}`, DateFormat);
     });
   }
 
@@ -53,12 +54,12 @@ export class ScheduleQuery extends Query<ScheduleState> {
     const year = reference.year();
 
     return Array.from({length: days}, (_, i) => i + 1).map(day => {
-      const instance = moment(`${day}.${month}.${year}`, 'DD.MM.YYYY');
+      const instance = moment(`${day}.${month}.${year}`, DateFormat);
       return {
         name: monthName,
         dayName:  instance.format('dd'),
         day,
-        date: instance.format('DD.MM.YYYY')
+        date: instance.format(DateFormat)
       };
     });
 

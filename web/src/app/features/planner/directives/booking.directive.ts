@@ -2,6 +2,7 @@ import {AfterViewInit, Directive, ElementRef, Input, Renderer2} from '@angular/c
 import * as interactLib from 'interactjs';
 import * as moment from 'moment';
 import {Booking} from '../state/booking.model';
+import {DateFormat} from '../../../shared/types/date.type';
 
 const interact: any = interactLib;
 
@@ -102,11 +103,9 @@ export class BookingDirective implements AfterViewInit {
 
 
   private resolvePosition(): { left, width } {
-    // TODO: Erweiterung für Monatserkennung
-
-    const momentFrom = moment(this.booking.from, 'DD.MM.YYYY');
-    const momentTo = moment(this.booking.to, 'DD.MM.YYYY');
-    const reference = moment(`${1}.${1}.${momentFrom.year()}`, 'DD.MM.YYYY');
+    const momentFrom = moment(this.booking.from, DateFormat);
+    const momentTo = moment(this.booking.to, DateFormat);
+    const reference = moment(`${1}.${1}.${momentFrom.year()}`, DateFormat);
 
     const diffFrom = momentFrom.diff(reference, 'days');
     const diffTo = momentTo.diff(reference, 'days') + 1;
