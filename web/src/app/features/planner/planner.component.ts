@@ -1,11 +1,14 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {NbDialogService} from '@nebular/theme';
 import {PeriodFormDialogComponent} from './components/period-form-dialog/period-form-dialog.component';
 import {AddBooking} from './interfaces/add-booking.interface';
 import * as moment from 'moment';
 import {BookingService} from './state/booking.service';
 import { createBooking } from './state/booking.model';
+import {Resource, ResourceQuery} from '../resources/state';
+import {ScheduleQuery} from './state/schedule/schedule.query';
+import {ScheduleColumn} from './state/schedule/schedule-column.interface';
 @Component({
   selector: 'r-planner',
   templateUrl: './planner.component.html',
@@ -16,7 +19,14 @@ export class PlannerComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  constructor(private nbDialogService: NbDialogService, private bookingService: BookingService) {
+  resources$: Observable<Resource[]> = this.resourceQuery.getWithBookings();
+  schedule$: Observable<ScheduleColumn[]> = this.scheduleQuery.selectYearlySchedule();
+
+  constructor(
+    private resourceQuery: ResourceQuery,
+    private scheduleQuery: ScheduleQuery,
+    private nbDialogService: NbDialogService,
+    private bookingService: BookingService) {
   }
 
   ngOnInit(): void {

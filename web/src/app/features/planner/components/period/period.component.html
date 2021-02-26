@@ -10,9 +10,13 @@
   </ng-container>
 
   <div class="day-slot"
+       [ngClass]="{
+              weekend: col.dayName === 'Sa' || col.dayName === 'Su',
+              start: col.day === 1
+             }"
        (click)="slotClicked($event)"
-       [attr.data-day]="y + 1"
-       *ngFor="let day of days, let y = index">
-<!--    {{ y + 1}}-->
+       [attr.data-day]="col.day"
+       *ngFor="let col of schedule, let y = index">
+    <span>{{ col.day }}</span>
   </div>
 </div>

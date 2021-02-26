@@ -1,7 +1,7 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {Resource, ResourceQuery} from '../../../resources/state';
-import {Observable} from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Resource} from '../../../resources/state';
 import {AddBooking} from '../../interfaces/add-booking.interface';
+import {ScheduleColumn} from '../../state/schedule/schedule-column.interface';
 
 @Component({
   selector: 'r-grid',
@@ -10,20 +10,26 @@ import {AddBooking} from '../../interfaces/add-booking.interface';
 })
 export class GridComponent implements OnInit {
 
+  @Input()
+  resources: Resource[];
+
+  @Input()
+  schedule: ScheduleColumn[];
+
   @Output()
   createBooking = new EventEmitter<AddBooking>();
 
   days = new Array(31);
   bookings: { left, top }[] = [];
-  resources$: Observable<Resource[]> = this.resourceQuery.getWithBookings();
-  constructor(private resourceQuery: ResourceQuery) {
+
+  constructor() {
   }
 
   ngOnInit(): void {
 
   }
 
-  onCreate(event: AddBooking): void{
+  onCreate(event: AddBooking): void {
     this.createBooking.emit(event);
   }
 

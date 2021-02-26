@@ -11,6 +11,7 @@ import {
 import * as interactLib from 'interactjs';
 import {Resource} from '../../../resources/state';
 import {AddBooking} from '../../interfaces/add-booking.interface';
+import {ScheduleColumn} from '../../state/schedule/schedule-column.interface';
 
 const interact: any = interactLib;
 
@@ -26,6 +27,9 @@ export class PeriodComponent implements AfterViewInit {
 
   @Input()
   days: number[];
+
+  @Input()
+  schedule: ScheduleColumn[];
 
   @Output()
   createBooking = new EventEmitter<AddBooking>();
@@ -51,7 +55,6 @@ export class PeriodComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.resource)
     this.makeGrid();
     this.componentReady = true;
     this.cd.detectChanges();

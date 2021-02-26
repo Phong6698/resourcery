@@ -103,11 +103,16 @@ export class BookingDirective implements AfterViewInit {
 
   private resolvePosition(): { left, width } {
     // TODO: Erweiterung für Monatserkennung
-    const parsedDayFrom = +moment(this.booking.from, 'DD.MM.YYYY').format('DD');
-    const parsedDayTo = +moment(this.booking.to, 'DD.MM.YYYY').format('DD');
 
-    const left = 44 * (parsedDayFrom - 1);
-    const width = (44 * parsedDayTo) - left;
+    const momentFrom = moment(this.booking.from, 'DD.MM.YYYY');
+    const momentTo = moment(this.booking.to, 'DD.MM.YYYY');
+    const reference = moment(`${1}.${1}.${momentFrom.year()}`, 'DD.MM.YYYY');
+
+    const diffFrom = momentFrom.diff(reference, 'days');
+    const diffTo = momentTo.diff(reference, 'days') + 1;
+
+    const left = 44 * (diffFrom);
+    const width = (44 * diffTo) - left;
 
     return {left, width};
 
