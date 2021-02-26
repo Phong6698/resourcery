@@ -6,7 +6,7 @@ import {UserStore} from '../state';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterGuard implements CanLoad, CanActivate {
+export class LoginGuard implements CanLoad, CanActivate {
 
   constructor(
     public router: Router,
@@ -14,11 +14,11 @@ export class RegisterGuard implements CanLoad, CanActivate {
   ) {}
 
   canLoad(): boolean | UrlTree {
-    return this.userStore.getValue().sessionToken ? this.router.parseUrl('/auth/login') : true;
+    return this.userStore.getValue().sessionToken ? this.router.parseUrl('/home') : true;
   }
 
   canActivate(): boolean | UrlTree {
-    return this.userStore.getValue().sessionToken ? this.router.parseUrl('/auth/login') : true;
+    return this.userStore.getValue().sessionToken ? this.router.parseUrl('/home') : true;
   }
 
 }

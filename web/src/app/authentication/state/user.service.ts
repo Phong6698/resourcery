@@ -12,6 +12,7 @@ export class UserService {
   async login(username: string, password: string): Promise<any> {
     this.userStore.setLoading(true);
     const user = await Parse.User.logIn(username, password);
+    console.log('try to login');
     this.userStore.update(this.mapParseUserToUserState(user));
     this.userStore.setLoading(false);
     return this.router.navigate(['/']);
