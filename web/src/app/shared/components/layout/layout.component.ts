@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NbMenuItem, NbThemeService} from '@nebular/theme';
 import versions from '../../../../_versions';
+import {UserQuery} from '../../../authentication/state';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'r-layout',
@@ -11,19 +14,34 @@ export class LayoutComponent implements OnInit {
 
   versions = versions;
   theme = 'dark';
+  dedicated = false;
 
-  items: NbMenuItem[] = [
+  items$!: Observable<NbMenuItem[]>;
+
+  loggedInItems: NbMenuItem[] = [
     {title: 'Dashboard', link: '/home'},
     {title: 'Planner', link: '/planner'},
     {title: 'Minions', link: '/resources'},
     {title: 'Projects', link: '/projects'},
   ];
+
+  loggedOutItems: NbMenuItem[] = [
+    {title: 'Login', link: '/auth/login'},
+    {title: 'Register', link: '/auth/register'}
+  ];
+
   constructor(
-    private nbThemeService: NbThemeService
+    private nbThemeService: NbThemeService,
+    public userQuery: UserQuery
   ) {
   }
 
   ngOnInit(): void {
+    this.items$ = this.userQuery.isLoggedIn$.pipe(
+      map( isLoggedIn => isLoggedIn ? this.loggedInItems : this.loggedOutItems),
+      startWith([])
+    );
+
   }
 
   changeTheme($event: string): void {

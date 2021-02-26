@@ -1,7 +1,10 @@
 <form (ngSubmit)="submit()" [formGroup]="loginForm">
   <div class="card-container">
     <nb-card>
-      <nb-card-header><h2>Login</h2></nb-card-header>
+      <nb-card-header>
+        <h2>Login</h2>
+        <div class="input-error-text" *ngIf="loginFailed"> Username or Password is incorrect! </div>
+      </nb-card-header>
       <nb-card-body>
         <div class="login-form-container">
           <div class="input-form">
@@ -11,7 +14,8 @@
                    nbInput
                    placeholder="Username"
                    [formControl]="username"
-                   fullWidth>
+                   fullWidth
+                   [ngClass]="{'input-error' : loginFailed}">
           </div>
           <div class="input-form">
             <label for="password" class="label">Password</label>
@@ -20,7 +24,8 @@
                    nbInput
                    placeholder="Password"
                    [formControl]="password"
-                   fullWidth>
+                   fullWidth
+                   [ngClass]="{'input-error' : loginFailed}">
           </div>
         </div>
       </nb-card-body>

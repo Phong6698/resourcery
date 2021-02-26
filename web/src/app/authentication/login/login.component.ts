@@ -10,6 +10,7 @@ import {UserService} from '../state';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  loginFailed = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,7 +42,9 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    await this.userService.login(this.username.value, this.password.value);
+    return this.userService.login(this.username.value, this.password.value).catch(() => {
+      this.loginFailed = true;
+    });
   }
 
 }

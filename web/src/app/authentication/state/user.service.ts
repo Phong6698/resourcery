@@ -7,12 +7,12 @@ import {Router} from '@angular/router';
 export class UserService {
 
   constructor(private userStore: UserStore, private router: Router) {
-    this.loadUser();
   }
 
   async login(username: string, password: string): Promise<any> {
     this.userStore.setLoading(true);
     const user = await Parse.User.logIn(username, password);
+    console.log('try to login');
     this.userStore.update(this.mapParseUserToUserState(user));
     this.userStore.setLoading(false);
     return this.router.navigate(['/']);
@@ -38,6 +38,7 @@ export class UserService {
   loadUser(): void {
     this.userStore.setLoading(true);
     const user = Parse.User.current();
+    console.log(user);
     if (user) {
       this.userStore.update(this.mapParseUserToUserState(user));
     }

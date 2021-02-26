@@ -21,6 +21,7 @@
           margin-bottom: 0.5em;
         }
       }
+
     }
 
     nb-card-footer {
@@ -30,6 +31,16 @@
       span {
         justify-self: center;
       }
+    }
+
+    .input-error-text {
+      color: red;
+      font-style: italic;
+    }
+
+    .input-error {
+      border-color: red;
+      border-width: 1px;
     }
   }
 
