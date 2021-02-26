@@ -12,6 +12,7 @@ import * as interactLib from 'interactjs';
 import {Resource} from '../../../resources/state';
 import {AddBooking} from '../../interfaces/add-booking.interface';
 import {ScheduleColumn} from '../../state/schedule/schedule-column.interface';
+import * as moment from 'moment';
 
 const interact: any = interactLib;
 
@@ -45,13 +46,9 @@ export class PeriodComponent implements AfterViewInit {
 
   public slotClicked(event: MouseEvent): void {
     // @ts-ignore
-    const rect = event.target?.parentNode.getBoundingClientRect();
-    console.log(rect);
+    const momentObj = moment(event.target?.dataset.date, 'DD.MM.YYYY');
 
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    this.createBooking.emit({x, y, resource: this.resource});
+    this.createBooking.emit({source: momentObj, resource: this.resource});
   }
 
   ngAfterViewInit(): void {

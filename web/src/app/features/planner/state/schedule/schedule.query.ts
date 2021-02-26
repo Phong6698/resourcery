@@ -21,15 +21,12 @@ export class ScheduleQuery extends Query<ScheduleState> {
 
       const months = this.makeMonths(year);
 
-      console.log(months)
       let response = [];
       months.map((month: moment.Moment) => {
-        console.log(this.makeDays(month));
-        // response = [...response, this.makeDays(month)];
         response = Array.prototype.concat.apply(this.makeDays(month), response);
       });
 
-      console.log(response.sort((a, b) => {
+      return response.sort((a, b) => {
         if (a.month > b.month){
           return 1;
         }
@@ -37,11 +34,8 @@ export class ScheduleQuery extends Query<ScheduleState> {
         if (a.month < b.month){
           return -1;
         }
-
         return 0;
-
-      }));
-      return response;
+      });
     }));
   }
 
@@ -59,12 +53,12 @@ export class ScheduleQuery extends Query<ScheduleState> {
     const year = reference.year();
 
     return Array.from({length: days}, (_, i) => i + 1).map(day => {
+      const instance = moment(`${day}.${month}.${year}`, 'DD.MM.YYYY');
       return {
         name: monthName,
-        dayName:  moment(`${day}.${month}.${year}`, 'DD.MM.YYYY').format('dd'),
+        dayName:  instance.format('dd'),
         day,
-        month,
-        year,
+        date: instance.format('DD.MM.YYYY')
       };
     });
 

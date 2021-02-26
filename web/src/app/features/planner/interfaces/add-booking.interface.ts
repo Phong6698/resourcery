@@ -1,7 +1,7 @@
 import {Resource} from '../../resources/state';
+import * as moment from 'moment';
 
 export interface AddBooking {
-  x: number;
-  y: number;
+  source: moment.Moment;
   resource?: Resource;
 }

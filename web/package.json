@@ -26,6 +26,7 @@
     "@datorama/akita": "^6.0.0",
     "@datorama/akita-ng-router-store": "^6.0.0",
     "@nebular/eva-icons": "7.0.0",
+    "@nebular/moment": "^7.0.0",
     "@nebular/theme": "^7.0.0",
     "@saithodev/ts-appversion": "^2.2.0",
     "@sentry/angular": "^6.2.0",

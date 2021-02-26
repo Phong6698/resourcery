@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Booking} from '../../state/booking.model';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: './period-form-dialog.component.html',
@@ -12,7 +13,11 @@ export class PeriodFormDialogComponent implements OnInit {
   isEdit = false;
   form!: FormGroup;
 
-  constructor(private nbDialogRef: NbDialogRef<PeriodFormDialogComponent>, private fb: FormBuilder) {
+
+  @Input() set source(source: moment.Moment){
+    if (source){
+      this.form.patchValue({daterange: {start: source}});
+    }
   }
 
   @Input() set booking(booking: Booking) {
@@ -22,11 +27,14 @@ export class PeriodFormDialogComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  constructor(private nbDialogRef: NbDialogRef<PeriodFormDialogComponent>, private fb: FormBuilder) {
     this.form = this.fb.group({
-      hours: [null, Validators.required],
+      hours: [moment().set({hour: 8, minute: 0}), Validators.required],
       daterange: [null, Validators.required]
     });
+  }
+
+  ngOnInit(): void {
   }
 
   cancel(): void {

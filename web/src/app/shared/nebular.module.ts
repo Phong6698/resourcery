@@ -14,6 +14,7 @@ import {
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {NgModule} from '@angular/core';
+import {NbMomentDateModule} from '@nebular/moment';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import {NgModule} from '@angular/core';
     NbMenuModule.forRoot(),
     NbTimepickerModule.forRoot(),
     NbDatepickerModule.forRoot(),
+    NbMomentDateModule
   ],
   exports: [
     NbThemeModule,
@@ -40,7 +42,8 @@ import {NgModule} from '@angular/core';
     NbIconModule,
     NbInputModule,
     NbTimepickerModule,
-    NbDatepickerModule
+    NbDatepickerModule,
+    NbMomentDateModule
   ]
 })
 export class NebularModule {

@@ -12,4 +12,4 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
     CommonModule
   ]
 })
-export class CoreModule { }
+export class CoreModule {}

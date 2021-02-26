@@ -15,7 +15,7 @@
               start: col.day === 1
              }"
        (click)="slotClicked($event)"
-       [attr.data-day]="col.day"
+       [attr.data-date]="col.date"
        *ngFor="let col of schedule, let y = index">
     <span>{{ col.day }}</span>
   </div>

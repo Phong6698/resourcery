@@ -1,4 +1,4 @@
-import {ErrorHandler, NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -10,7 +10,6 @@ import {environment} from '../environments/environment';
 import {HomeComponent} from './home/home.component';
 import {SharedModule} from './shared/shared.module';
 import {NbDialogModule} from '@nebular/theme';
-import {SentryService} from './error-handler/sentry.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +28,7 @@ import {SentryService} from './error-handler/sentry.service';
   ],
   providers: [
     // {provide: ErrorHandler, useClass: SentryService}
+    {provide: LOCALE_ID, useValue: 'de-CH'}
   ],
   bootstrap: [AppComponent]
 })

@@ -33,7 +33,7 @@ export class PlannerComponent implements OnInit, OnDestroy {
   }
 
   createBooking(event: AddBooking): void {
-    const dialogSub = this.nbDialogService.open(PeriodFormDialogComponent)
+    const dialogSub = this.nbDialogService.open(PeriodFormDialogComponent, {context: {source: event.source}})
       .onClose
       .subscribe(values => {
         const booking = createBooking({
