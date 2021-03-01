@@ -5,8 +5,9 @@
 
       <div class="header-menu">
         <h1>Resourcery</h1>
-        <nb-menu class="menu-horizontal" [items]="items">
-        </nb-menu>
+        <ng-container *ngIf="items$ | async as items">
+          <nb-menu class="menu-horizontal" [items]="items"></nb-menu>
+        </ng-container>
       </div>
       <nb-select placeholder="Theme"
                  [(selected)]="theme"

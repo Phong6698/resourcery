@@ -1,4 +1,4 @@
-import {ErrorHandler, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -10,7 +10,8 @@ import {environment} from '../environments/environment';
 import {HomeComponent} from './home/home.component';
 import {SharedModule} from './shared/shared.module';
 import {NbDialogModule} from '@nebular/theme';
-import {SentryService} from './error-handler/sentry.service';
+import {UserService} from './authentication/state';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +29,19 @@ import {SentryService} from './error-handler/sentry.service';
     NbDialogModule.forChild()
   ],
   providers: [
-    // {provide: ErrorHandler, useClass: SentryService}
+    // {provide: ErrorHandler, useClass: SentryService},
+    {
+      provide: APP_INITIALIZER,
+      useFactory: userContextProviderFactory,
+      deps: [UserService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function userContextProviderFactory(userService: UserService): () => void {
+  return () => userService.loadUser();
 }
