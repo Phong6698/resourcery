@@ -1,0 +1,37 @@
+<div class="schedule">
+  <div class="resources">
+    <div class="resource"></div>
+    <div *ngFor="let resource of resources$ | async" class="resource">{{resource.firstname}}</div>
+  </div>
+  <div class="schedule-board">
+    <div class="title">
+      <div class="title-months">
+        <ng-container *ngFor="let titleMonth of months">
+          <div *ngFor="let date of titleMonth.dates; index as i" class="title-month" [id]="date">
+            {{ i === 0 ? (date | date: 'MMMM') : null}}
+          </div>
+        </ng-container>
+      </div>
+      <div class="title-days">
+        <div *ngFor="let titleDay of dates" class="title-day">
+          <span>{{titleDay | date: 'EE'}}</span>
+          <span>{{titleDay | date: 'd'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="schedule">
+      <div *ngFor="let resource of resources$ | async; index as resourceIndex" class="resource">
+        <div class="days">
+          <div *ngFor="let date of dates; index as dateIndex"
+               class="day"
+               (click)="onDayClick(date, resource)">
+          </div>
+        </div>
+      </div>
+      <ng-container *ngFor="let booking of bookings$ | async">
+        <r-booking class="draggable" [booking]="booking"></r-booking>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

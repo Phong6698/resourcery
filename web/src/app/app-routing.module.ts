@@ -15,6 +15,10 @@ const routes: Routes = [
     canLoad: [AuthenticationGuard]
   },
   {
+    path: 'schedule',
+    loadChildren: () => import('./features/schedule/schedule.module').then(m => m.ScheduleModule)
+  },
+  {
     path: 'resources',
     loadChildren: () => import('./features/resources/resources.module').then(m => m.ResourcesModule),
     canLoad: [AuthenticationGuard]

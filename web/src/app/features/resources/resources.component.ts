@@ -24,6 +24,7 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.resourceService.load();
   }
 
   ngOnDestroy(): void {
@@ -32,7 +33,7 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   }
 
   addResource(): void {
-    this.resourceService.createResource(
+    this.resourceService.create(
       {
         firstname: 'Phong',
         lastname: 'Penglerd',
@@ -45,7 +46,7 @@ export class ResourcesComponent implements OnInit, OnDestroy {
     this.nbDialogService.open(ResourceFormDialogComponent).onClose.pipe(
       takeUntil(this.onDestroy$),
       filter(resource => !!resource),
-      switchMap(resource => of(this.resourceService.createResource(resource)))
+      switchMap(resource => of(this.resourceService.create(resource)))
     ).subscribe(console.log);
   }
 
@@ -55,12 +56,12 @@ export class ResourcesComponent implements OnInit, OnDestroy {
     ).onClose.pipe(
       takeUntil(this.onDestroy$),
       filter(editedResource => !!editedResource),
-      switchMap(editedResource => of(this.resourceService.updateResource(editedResource, resource.id)))
+      switchMap(editedResource => of(this.resourceService.update(editedResource, resource.id)))
     ).subscribe(console.log);
   }
 
   deleteResource(id: ID): void {
-    this.resourceService.deleteResource(id).then(console.log);
+    this.resourceService.delete(id).then(console.log);
   }
 
 }

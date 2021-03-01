@@ -1,0 +1,65 @@
+.schedule {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  .resources {
+    display: grid;
+    grid-template-rows: 100px repeat(auto-fit, 50px);
+    margin-right: 2em;
+
+    .resource {
+      height: 50px;
+    }
+  }
+
+  .schedule-board {
+    overflow: auto;
+
+    .title {
+      .title-months {
+        display: grid;
+        grid-auto-flow: column;
+
+        .title-month {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .title-days {
+        display: grid;
+        grid-auto-flow: column;
+        border-bottom: 1px solid #444;
+
+        .title-day {
+          width: 50px;
+          height: 50px;
+          display: grid;
+        }
+      }
+    }
+
+    .schedule {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 2em;
+
+      .resource {
+        .days {
+          display: grid;
+          grid-auto-flow: column;
+
+          .day {
+            border: 1px solid #444;
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
