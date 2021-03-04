@@ -20,16 +20,18 @@
       </div>
     </div>
     <div class="schedule">
-      <div *ngFor="let resource of resources$ | async; index as resourceIndex" class="resource">
-        <div class="days">
-          <div *ngFor="let date of dates; index as dateIndex"
-               class="day"
-               (click)="onDayClick(date, resource)">
+      <ng-container *ngIf="resources$ | async as resources">
+        <div *ngFor="let resource of resources; index as resourceIndex" class="resource">
+          <div class="days">
+            <div *ngFor="let date of dates; index as dateIndex"
+                 class="day"
+                 (click)="onDayClick(date, resource)">
+            </div>
           </div>
         </div>
-      </div>
-      <ng-container *ngFor="let booking of bookings$ | async">
-        <r-booking class="draggable" [booking]="booking"></r-booking>
+        <ng-container *ngIf="resources">
+          <r-booking *ngFor="let booking of bookings$ | async" class="draggable" [booking]="booking"></r-booking>
+        </ng-container>
       </ng-container>
     </div>
   </div>

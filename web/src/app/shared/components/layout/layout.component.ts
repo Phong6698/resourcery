@@ -20,7 +20,6 @@ export class LayoutComponent implements OnInit {
 
   loggedInItems: NbMenuItem[] = [
     {title: 'Dashboard', link: '/home'},
-    {title: 'Planner', link: '/planner'},
     {title: 'Schedule', link: '/schedule'},
     {title: 'Minions', link: '/resources'},
     {title: 'Projects', link: '/projects'},

@@ -10,19 +10,32 @@ import {ScheduleBooking} from '../shared/schedule-booking.model';
 })
 export class BookingComponent implements OnInit {
 
-  @Input() booking: ScheduleBooking;
   @HostBinding('style.width') width;
   @HostBinding('style.left') left;
   @HostBinding('style.top') top;
+
+  private bookingSource: ScheduleBooking;
+
+  @Input() set booking(booking: ScheduleBooking) {
+    this.bookingSource = booking;
+    const {schedulePosition} = this.booking;
+    this.width = (schedulePosition.dateEndIndex - schedulePosition.dateStartIndex + 1) * 50 + 'px';
+    this.left = schedulePosition.dateStartIndex * 50 + 'px';
+    this.top = schedulePosition.resourceIndex * 50 + 'px';
+  }
+
+  get booking(): ScheduleBooking {
+    return this.bookingSource;
+  }
 
   constructor(private elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
-    const {schedulePosition} = this.booking;
-    this.width = (schedulePosition.dateEndIndex - schedulePosition.dateStartIndex + 1) * 50 + 'px'; // TODO move that to input setter
-    this.left = schedulePosition.dateStartIndex * 50 + 'px'; // TODO move that to input setter
-    this.top = schedulePosition.resourceIndex * 50 + 'px'; // TODO move that to input setter
+    this.initInteract();
+  }
+
+  private initInteract(): void {
     interact(this.elementRef.nativeElement)
       .draggable({
         modifiers: [
@@ -40,7 +53,6 @@ export class BookingComponent implements OnInit {
           move: (event) => {
             event.target.style.left = event.target.offsetLeft + event.dx + 'px';
             event.target.style.top = event.target.offsetTop + event.dy + 'px';
-            // event.target.textContent = event.target.style.left + ' ' + event.target.style.top;
           }
         }
       })

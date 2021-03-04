@@ -1,5 +1,4 @@
 import {ID} from '@datorama/akita';
-import {Booking} from '../../planner/state/booking.model';
 
 export interface Resource {
   id: ID;
@@ -8,7 +7,6 @@ export interface Resource {
   type: ResourceType;
   createdAt: Date;
   updatedAt: Date;
-  bookings?: (Booking | ID)[];
 }
 
 export enum ResourceType {

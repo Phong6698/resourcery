@@ -10,11 +10,6 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: 'planner',
-    loadChildren: () => import('./features/planner/planner.module').then(m => m.PlannerModule),
-    canLoad: [AuthenticationGuard]
-  },
-  {
     path: 'schedule',
     loadChildren: () => import('./features/schedule/schedule.module').then(m => m.ScheduleModule)
   },
