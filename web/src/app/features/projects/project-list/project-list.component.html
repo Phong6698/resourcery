@@ -3,8 +3,8 @@
     <nb-card-header><h2>Projects</h2></nb-card-header>
     <nb-list>
       <nb-list-item *ngFor="let project of projects; trackBy: trackById">
-        <nb-user name="{{project.name}}"
-                 [title]="project.description.toLowerCase()">
+        <nb-user name="{{project.attributes.name}}"
+                 [title]="project.attributes.description.toLowerCase()">
         </nb-user>
         <button nbButton status="basic" (click)="onEditProject(project)">
           <nb-icon icon="edit-outline"></nb-icon>

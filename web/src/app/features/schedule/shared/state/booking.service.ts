@@ -1,9 +1,8 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {BookingStore} from './booking.store';
+import {BookingState, BookingStore} from './booking.store';
 import * as Parse from 'parse';
-import {LiveQuerySubscription, Object} from 'parse';
-import {Booking} from './booking.model';
-import {mapSimpleParseObject} from '../../../../shared/parse-util';
+import {LiveQuerySubscription} from 'parse';
+import {Booking, ParseBooking} from './booking.model';
 import {ID} from '@datorama/akita';
 
 @Injectable({ providedIn: 'root' })
@@ -21,20 +20,20 @@ export class BookingService implements OnDestroy {
 
   load(): void {
     this.bookingStore.setLoading(true);
-    const query = new Parse.Query<Object<Booking>>(BookingService.CLASS_NAME);
+    const query = new Parse.Query<ParseBooking>(BookingService.CLASS_NAME);
     query.findAll().then(bookings => {
-      this.bookingStore.set(bookings.map(mapSimpleParseObject));
+      this.bookingStore.set(bookings as BookingState);
       if (!this.subscription) {
         query.subscribe().then(subscription => {
           this.subscription = subscription;
-          this.subscription.on('create', (res) => {
-            this.bookingStore.add(mapSimpleParseObject(res as Object<Booking>));
+          this.subscription.on('create', (res: ParseBooking) => {
+            this.bookingStore.add(res);
           });
           this.subscription.on('delete', (res) => {
             this.bookingStore.remove(res.id);
           });
-          this.subscription.on('update', (res) => {
-            this.bookingStore.update(res.id, mapSimpleParseObject(res as Object<Booking>));
+          this.subscription.on('update', (res: ParseBooking) => {
+            this.bookingStore.update(res.id, res);
           });
         });
       }

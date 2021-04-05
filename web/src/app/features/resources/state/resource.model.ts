@@ -1,7 +1,6 @@
-import {ID} from '@datorama/akita';
+import {Object} from 'parse';
 
 export interface Resource {
-  id: ID;
   firstname: string;
   lastname: string;
   type: ResourceType;
@@ -13,6 +12,9 @@ export enum ResourceType {
   PERSON = 'PERSON'
 }
 
-export function createResource(params: Partial<Resource>): Resource {
-  return {} as Resource;
+export interface ParseResource extends Object<Resource>{}
+
+
+export function createParseResource(params: Partial<ParseResource>): ParseResource {
+  return {} as ParseResource;
 }

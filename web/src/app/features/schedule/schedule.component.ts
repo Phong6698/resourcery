@@ -1,9 +1,11 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {Booking, BookingQuery, BookingService} from './shared/state';
+import {Booking, BookingQuery, BookingService, ParseBooking} from './shared/state';
 import {combineLatest, Observable} from 'rxjs';
 import {ScheduleBooking} from './shared/schedule-booking.model';
 import {map} from 'rxjs/operators';
-import {Resource, ResourceQuery, ResourceService} from '../resources/state';
+import {ParseResource, ResourceQuery, ResourceService} from '../resources/state';
+import * as Parse from 'parse';
+import {ProjectService} from '../projects/state';
 
 @Component({
   selector: 'r-schedule',
@@ -12,8 +14,8 @@ import {Resource, ResourceQuery, ResourceService} from '../resources/state';
 })
 export class ScheduleComponent implements OnInit {
 
-  resources$: Observable<Resource[]>;
-  bookings$: Observable<ScheduleBooking[]>;
+  resources$: Observable<ParseResource[]>;
+  scheduleBookings$: Observable<ScheduleBooking[]>;
 
   dates: number[];
   months: { dates: Date[] }[];
@@ -36,18 +38,18 @@ export class ScheduleComponent implements OnInit {
     this.dates = this.getDates(startDate, endDate).map(date => date.valueOf());
     this.months = this.getDatesGroupedByMonths(this.getDates(startDate, endDate));
     this.resources$ = this.resourceQuery.resources$;
-    this.bookings$ = combineLatest([this.bookingQuery.bookings$, this.resources$]).pipe(
+    this.scheduleBookings$ = combineLatest([this.bookingQuery.bookings$, this.resources$]).pipe(
       map(([bookings, resources]) =>
         bookings.map(booking =>
           this.mapToScheduleBookings(booking, resources, this.dates)))
     );
   }
 
-  private mapToScheduleBookings = (booking: Booking, resources: Resource[], dates: number[]): ScheduleBooking => {
-    const dateStartIndex = dates.findIndex(date => date === booking.start);
-    const dateEndIndex = dates.findIndex(date => date === booking.end);
-    const resourceIndex = resources.findIndex(res => res.id === booking.resource.id);
-    return {...booking, schedulePosition: {dateStartIndex, dateEndIndex, resourceIndex}};
+  private mapToScheduleBookings = (booking: ParseBooking, resources: ParseResource[], dates: number[]): ScheduleBooking => {
+    const dateStartIndex = dates.findIndex(date => date === booking.attributes.start);
+    const dateEndIndex = dates.findIndex(date => date === booking.attributes.end);
+    const resourceIndex = resources.findIndex(res => res.id === booking.attributes.resource.id);
+    return {booking, schedulePosition: {dateStartIndex, dateEndIndex, resourceIndex}};
   }
 
   // TODO change to momentjs
@@ -72,16 +74,17 @@ export class ScheduleComponent implements OnInit {
       );
   }
 
-  onDayClick(day: number, resource: Resource): void {
+  onDayClick(day: number, resource: ParseResource): void {
+    const ProjectClass = Parse.Object.extend(ProjectService.CLASS_NAME);
+    const project = new ProjectClass();
+    project.set('id', 1);
+    project.set('name', 'Project');
+    project.set('description', 'Test');
     const newBooking = {
       start: day,
       end: day,
       resource,
-      project: {
-        id: 1,
-        name: 'Project',
-        description: 'Test',
-      }
+      project,
     } as Booking;
     this.bookingService.create(newBooking).then();
   }

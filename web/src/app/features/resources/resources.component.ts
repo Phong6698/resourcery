@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Resource, ResourceQuery, ResourceService, ResourceType} from './state';
-import {ID} from '@datorama/akita';
+import {ParseResource, ResourceQuery, ResourceService, ResourceType} from './state';
 import {NbDialogService} from '@nebular/theme';
 import {ResourceFormDialogComponent} from './resource-form-dialog/resource-form-dialog.component';
 import {filter, switchMap, takeUntil} from 'rxjs/operators';
-import {of, Subject} from 'rxjs';
+import {from, Subject} from 'rxjs';
 
 @Component({
   selector: 'r-resources',
@@ -46,21 +45,21 @@ export class ResourcesComponent implements OnInit, OnDestroy {
     this.nbDialogService.open(ResourceFormDialogComponent).onClose.pipe(
       takeUntil(this.onDestroy$),
       filter(resource => !!resource),
-      switchMap(resource => of(this.resourceService.create(resource)))
+      switchMap(resource => from(this.resourceService.create(resource)))
     ).subscribe(console.log);
   }
 
-  editResource(resource: Resource): void {
+  editResource(resource: ParseResource): void {
     this.nbDialogService.open(
       ResourceFormDialogComponent, {context: {resource}}
     ).onClose.pipe(
       takeUntil(this.onDestroy$),
       filter(editedResource => !!editedResource),
-      switchMap(editedResource => of(this.resourceService.update(editedResource, resource.id)))
+      switchMap(editedResource => from(this.resourceService.update(resource.id, editedResource)))
     ).subscribe(console.log);
   }
 
-  deleteResource(id: ID): void {
+  deleteResource(id: string): void {
     this.resourceService.delete(id).then(console.log);
   }
 

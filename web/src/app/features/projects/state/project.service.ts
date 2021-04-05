@@ -1,14 +1,13 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ProjectStore} from './project.store';
-import {LiveQuerySubscription, Object} from 'parse';
 import * as Parse from 'parse';
-import {ID} from '@datorama/akita';
-import {Project} from './project.model';
+import {LiveQuerySubscription} from 'parse';
+import {ParseProject, Project} from './project.model';
 
 @Injectable({providedIn: 'root'})
 export class ProjectService implements OnDestroy {
 
-  private static readonly CLASS_NAME = 'Project';
+  static readonly CLASS_NAME = 'Project';
 
   private subscription!: LiveQuerySubscription;
 
@@ -21,18 +20,18 @@ export class ProjectService implements OnDestroy {
   }
 
   private async initProjects(): Promise<any> {
-    const query = new Parse.Query<Object<Project>>(ProjectService.CLASS_NAME);
+    const query = new Parse.Query<ParseProject>(ProjectService.CLASS_NAME);
     this.subscription = await query.subscribe();
     const projects = await query.findAll();
-    this.projectStore.set(projects.map(this.mapParseProject));
-    this.subscription.on('create', (pj) => {
-      this.projectStore.add(this.mapParseProject(pj as Object<Project>));
+    this.projectStore.set(projects);
+    this.subscription.on('create', (pj: ParseProject) => {
+      this.projectStore.add(pj);
     });
     this.subscription.on('delete', (pj) => {
       this.projectStore.remove(pj.id);
     });
-    this.subscription.on('update', (pj) => {
-      this.projectStore.update(pj.id, this.mapParseProject(pj as Object<Project>));
+    this.subscription.on('update', (pj: ParseProject) => {
+      this.projectStore.replace(pj.id, pj);
     });
   }
 
@@ -42,20 +41,18 @@ export class ProjectService implements OnDestroy {
     return newProject.save(project);
   }
 
-  async deleteProject(id: ID): Promise<any> {
+  async deleteProject(id: string): Promise<any> {
     const query = new Parse.Query(ProjectService.CLASS_NAME);
     query.equalTo('objectId', id);
     const project = await query.first();
     return project?.destroy();
   }
 
-  async updateProject(editedProject: Partial<Project>, id: ID): Promise<any> {
+  async updateProject(id: string, editedProject: Partial<Project>): Promise<any> {
     const query = new Parse.Query(ProjectService.CLASS_NAME);
     query.equalTo('objectId', id);
     const project = await query.first();
     return project?.save(editedProject);
   }
-
-  private mapParseProject = (project: Object<Project>): Project => ({...project.attributes, id: project.id});
 
 }

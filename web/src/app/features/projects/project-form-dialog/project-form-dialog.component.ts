@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Project} from '../state';
+import {ParseProject} from '../state';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NbDialogRef} from '@nebular/theme';
 
@@ -12,10 +12,10 @@ export class ProjectFormDialogComponent implements OnInit {
 
   isEdit = false;
 
-  @Input() set project(project: Project) {
+  @Input() set project(project: ParseProject) {
     console.log('set project');
     if (project) {
-      this.newProjectForm.patchValue(project);
+      this.newProjectForm.patchValue(project.attributes);
       this.isEdit = true;
     }
   }

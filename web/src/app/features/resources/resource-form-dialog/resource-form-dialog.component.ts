@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Resource, ResourceType} from '../state';
+import {ParseResource, ResourceType} from '../state';
 
 @Component({
   selector: 'r-resource-form-dialog',
@@ -12,10 +12,10 @@ export class ResourceFormDialogComponent implements OnInit {
 
   isEdit = false;
 
-  @Input() set resource(resource: Resource) {
+  @Input() set resource(resource: ParseResource) {
     console.log('set resource');
     if (resource) {
-      this.newResourceForm.patchValue(resource);
+      this.newResourceForm.patchValue(resource.attributes);
       this.isEdit = true;
     }
   }

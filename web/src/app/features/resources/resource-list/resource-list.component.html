@@ -3,8 +3,8 @@
     <nb-card-header><h2>Minions</h2></nb-card-header>
     <nb-list>
       <nb-list-item *ngFor="let resource of resources; trackBy: trackById">
-        <nb-user name="{{resource.firstname}} {{resource.lastname}}"
-                 [title]="resource.type.toLowerCase()"></nb-user>
+        <nb-user name="{{resource.attributes.firstname}} {{resource.attributes.lastname}}"
+                 [title]="resource.attributes.type.toLowerCase()"></nb-user>
         <button nbButton status="basic" (click)="onEditResource(resource)">
           <nb-icon icon="edit-outline"></nb-icon>
         </button>

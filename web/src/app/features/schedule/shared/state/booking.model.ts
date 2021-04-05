@@ -1,17 +1,16 @@
-import {ID} from '@datorama/akita';
 import {Project} from '../../../projects/state';
 import {Resource} from '../../../resources/state';
+import {Object} from 'parse';
 
-
-// TODO maybe make it to Parse.Query<Object<Booking>> so we don't have to map and use relations easier
 export interface Booking {
-  id: ID;
   start: number;
   end: number;
-  resource: Resource;
-  project: Project;
+  resource: Object<Resource>;
+  project: Object<Project>;
 }
 
-export function createBooking(params: Partial<Booking>): Booking {
-  return {} as Booking;
+export interface ParseBooking extends Object<Booking>{}
+
+export function createBooking(params: Partial<ParseBooking>): ParseBooking {
+  return {} as ParseBooking;
 }

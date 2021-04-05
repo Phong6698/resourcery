@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {of, Subject} from 'rxjs';
+import {from, Subject} from 'rxjs';
 import {NbDialogService} from '@nebular/theme';
-import {Project, ProjectQuery, ProjectService} from './state';
+import {ParseProject, ProjectQuery, ProjectService} from './state';
 import {filter, switchMap, takeUntil} from 'rxjs/operators';
 import {ProjectFormDialogComponent} from './project-form-dialog/project-form-dialog.component';
-import {ID} from '@datorama/akita';
 
 @Component({
   selector: 'r-projects',
@@ -44,21 +43,21 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.nbDialogService.open(ProjectFormDialogComponent).onClose.pipe(
       takeUntil(this.onDestroy$),
       filter(project => !!project),
-      switchMap(project => of(this.projectService.createProject(project)))
+      switchMap(project => from(this.projectService.createProject(project)))
     ).subscribe(console.log);
   }
 
-  editProject(project: Project): void {
+  editProject(project: ParseProject): void {
     this.nbDialogService.open(
       ProjectFormDialogComponent, {context: {project}}
     ).onClose.pipe(
       takeUntil(this.onDestroy$),
       filter(editedProject => !!editedProject),
-      switchMap(editedProject => of(this.projectService.updateProject(editedProject, project.id)))
+      switchMap(editedProject => from(this.projectService.updateProject(project.id, editedProject)))
     ).subscribe(console.log);
   }
 
-  deleteProject(id: ID): void {
+  deleteProject(id: string): void {
     this.projectService.deleteProject(id).then(console.log);
   }
 

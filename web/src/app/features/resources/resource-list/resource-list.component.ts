@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Resource} from '../state';
-import {ID} from '@datorama/akita';
+import {ParseResource} from '../state';
 
 @Component({
   selector: 'r-resource-list',
@@ -10,10 +9,10 @@ import {ID} from '@datorama/akita';
 })
 export class ResourceListComponent implements OnInit {
 
-  @Input() resources: Resource[] | undefined | null;
+  @Input() resources: ParseResource[] | undefined | null;
   @Output() createResource = new EventEmitter<void>();
-  @Output() editResource = new EventEmitter<Resource>();
-  @Output() deleteResource = new EventEmitter<ID>();
+  @Output() editResource = new EventEmitter<ParseResource>();
+  @Output() deleteResource = new EventEmitter<string>();
 
   constructor() {
   }
@@ -27,11 +26,11 @@ export class ResourceListComponent implements OnInit {
     this.createResource.emit();
   }
 
-  onEditResource(resource: Resource): void {
+  onEditResource(resource: ParseResource): void {
     this.editResource.emit(resource);
   }
 
-  onDeleteResource(id: ID): void {
+  onDeleteResource(id: string): void {
     this.deleteResource.emit(id);
   }
 }

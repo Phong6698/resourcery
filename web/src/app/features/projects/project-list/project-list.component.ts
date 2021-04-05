@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ID} from '@datorama/akita';
-import {Project} from '../state';
+import {ParseProject} from '../state';
 
 @Component({
   selector: 'r-project-list',
@@ -10,10 +9,10 @@ import {Project} from '../state';
 })
 export class ProjectListComponent implements OnInit {
 
-  @Input() projects: Project[] | undefined | null;
+  @Input() projects: ParseProject[] | undefined | null;
   @Output() createProject = new EventEmitter<void>();
-  @Output() editProject = new EventEmitter<Project>();
-  @Output() deleteProject = new EventEmitter<ID>();
+  @Output() editProject = new EventEmitter<ParseProject>();
+  @Output() deleteProject = new EventEmitter<string>();
 
   constructor() {
   }
@@ -27,11 +26,11 @@ export class ProjectListComponent implements OnInit {
     this.createProject.emit();
   }
 
-  onEditProject(project: Project): void {
+  onEditProject(project: ParseProject): void {
     this.editProject.emit(project);
   }
 
-  onDeleteProject(id: ID): void {
+  onDeleteProject(id: string): void {
     this.deleteProject.emit(id);
   }
 

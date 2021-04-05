@@ -1,6 +1,7 @@
-import {Booking} from './state';
+import {ParseBooking} from './state';
 
-export interface ScheduleBooking extends Booking {
+export interface ScheduleBooking {
+  booking: ParseBooking;
   schedulePosition: {
     dateStartIndex: number;
     dateEndIndex: number;

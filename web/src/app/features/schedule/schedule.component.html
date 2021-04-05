@@ -1,7 +1,7 @@
 <div class="schedule">
   <div class="resources">
     <div class="resource"></div>
-    <div *ngFor="let resource of resources$ | async" class="resource">{{resource.firstname}}</div>
+    <div *ngFor="let resource of resources$ | async" class="resource">{{resource.attributes.firstname}}</div>
   </div>
   <div class="schedule-board">
     <div class="title">
@@ -30,7 +30,9 @@
           </div>
         </div>
         <ng-container *ngIf="resources">
-          <r-booking *ngFor="let booking of bookings$ | async" class="draggable" [booking]="booking"></r-booking>
+          <r-booking *ngFor="let scheduleBooking of scheduleBookings$ | async"
+                     class="draggable"
+                     [scheduleBooking]="scheduleBooking"></r-booking>
         </ng-container>
       </ng-container>
     </div>

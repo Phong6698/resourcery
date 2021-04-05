@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit} from '@angular/core';
 import interact from 'interactjs';
 import {ScheduleBooking} from '../shared/schedule-booking.model';
+import {ParseBooking} from '../shared/state';
 
 @Component({
   selector: 'r-booking',
@@ -14,18 +15,14 @@ export class BookingComponent implements OnInit {
   @HostBinding('style.left') left;
   @HostBinding('style.top') top;
 
-  private bookingSource: ScheduleBooking;
+  booking: ParseBooking;
 
-  @Input() set booking(booking: ScheduleBooking) {
-    this.bookingSource = booking;
-    const {schedulePosition} = this.booking;
+  @Input() set scheduleBooking(scheduleBooking: ScheduleBooking) {
+    const {booking, schedulePosition} = scheduleBooking;
+    this.booking = booking;
     this.width = (schedulePosition.dateEndIndex - schedulePosition.dateStartIndex + 1) * 50 + 'px';
     this.left = schedulePosition.dateStartIndex * 50 + 'px';
     this.top = schedulePosition.resourceIndex * 50 + 'px';
-  }
-
-  get booking(): ScheduleBooking {
-    return this.bookingSource;
   }
 
   constructor(private elementRef: ElementRef) {

@@ -1,13 +1,15 @@
-import {ID} from '@datorama/akita';
+import {Object} from 'parse';
 
 export interface Project {
-  id: ID;
+  id: string;
   name: string;
   description: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export function createProject(params: Partial<Project>): Project {
-  return {} as Project;
+export interface ParseProject extends Object<Project>{}
+
+export function createProject(params: Partial<ParseProject>): ParseProject {
+  return {} as ParseProject;
 }

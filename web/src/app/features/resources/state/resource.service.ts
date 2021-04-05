@@ -2,9 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {ResourceStore} from './resource.store';
 import * as Parse from 'parse';
 import {LiveQuerySubscription, Object} from 'parse';
-import {Resource} from './resource.model';
-import {ID} from '@datorama/akita';
-import {mapSimpleParseObject} from '../../../shared/parse-util';
+import {ParseResource, Resource} from './resource.model';
 
 @Injectable({providedIn: 'root'})
 export class ResourceService implements OnDestroy {
@@ -23,18 +21,18 @@ export class ResourceService implements OnDestroy {
     this.resourceStore.setLoading(true);
     const query = new Parse.Query<Object<Resource>>(ResourceService.CLASS_NAME);
     query.findAll().then(bookings => {
-      this.resourceStore.set(bookings.map(mapSimpleParseObject));
+      this.resourceStore.set(bookings);
       if (!this.subscription) {
         query.subscribe().then(subscription => {
           this.subscription = subscription;
-          this.subscription.on('create', (res) => {
-            this.resourceStore.add(mapSimpleParseObject(res as Object<Resource>));
+          this.subscription.on('create', (res: ParseResource) => {
+            this.resourceStore.add(res);
           });
           this.subscription.on('delete', (res) => {
             this.resourceStore.remove(res.id);
           });
-          this.subscription.on('update', (res) => {
-            this.resourceStore.update(res.id, mapSimpleParseObject(res as Object<Resource>));
+          this.subscription.on('update', (res: ParseResource) => {
+            this.resourceStore.replace(res.id, res);
           });
         });
       }
@@ -48,14 +46,14 @@ export class ResourceService implements OnDestroy {
     return newResource.save(resource);
   }
 
-  async delete(id: ID): Promise<any> {
+  async delete(id: string): Promise<any> {
     const query = new Parse.Query(ResourceService.CLASS_NAME);
     query.equalTo('objectId', id);
     const resource = await query.first();
     return resource?.destroy();
   }
 
-  async update(editedResource: Partial<Resource>, id: ID): Promise<any> {
+  async update(id: string, editedResource: Partial<Resource>): Promise<any> {
     const query = new Parse.Query(ResourceService.CLASS_NAME);
     query.equalTo('objectId', id);
     const resource = await query.first();
